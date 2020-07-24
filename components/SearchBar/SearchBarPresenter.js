@@ -1,9 +1,9 @@
-import React from "react";
-import { Platform, TouchableOpacity } from "react-native";
-import styled from "styled-components";
-import { Ionicons } from "@expo/vector-icons";
-import PropTypes from "prop-types";
-import Colors from "../../constants/Colors";
+import React from 'react';
+import { Platform, TouchableOpacity } from 'react-native';
+import styled from 'styled-components';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import PropTypes from 'prop-types';
+import Colors from '../../constants/Colors';
 
 const Container = styled.View`
   flex: 1;
@@ -14,12 +14,12 @@ const Container = styled.View`
 `;
 
 const Input = styled.TextInput`
-  background-color: ${Platform.OS === "ios" ? Colors.darkGreyColor : "white"};
+  background-color: ${Platform.OS === 'ios' ? Colors.darkGreyColor : 'white'};
   border-radius: 18px;
   padding-horizontal: 15px;
-  width: ${Platform.OS === "ios" ? "90%" : "91%"};
+  width: ${Platform.OS === 'ios' ? '90%' : '91%'};
   margin-right: 10px;
-  height: ${Platform.OS === "ios" ? "40px" : "auto"};
+  height: ${Platform.OS === 'ios' ? '40px' : 'auto'};
 `;
 
 const XButton = styled.View`
@@ -46,7 +46,7 @@ const SearchBarPresenter = ({ onSubmit, value, updateValue, clearValue }) => (
       <XButton>
         <Ionicons
           size={30}
-          name={Platform.OS === "ios" ? "ios-close" : "md-close"}
+          name={Platform.OS === 'ios' ? 'ios-close' : 'md-close'}
         />
       </XButton>
     </TouchableOpacity>
@@ -57,7 +57,7 @@ SearchBarPresenter.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
   updateValue: PropTypes.func.isRequired,
-  clearValue: PropTypes.func.isRequired
+  clearValue: PropTypes.func.isRequired,
 };
 
 export default SearchBarPresenter;

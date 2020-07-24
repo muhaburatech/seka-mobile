@@ -1,16 +1,16 @@
-import React from "react";
-import styled from "styled-components";
-import { withNavigation } from "react-navigation";
-import PropTypes from "prop-types";
-import { Platform, TouchableWithoutFeedback } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import Avatar from "./Avatar";
-import Colors from "../constants/Colors";
+import React from 'react';
+import styled from 'styled-components';
+import { withNavigation } from 'react-navigation';
+import PropTypes from 'prop-types';
+import { Platform, TouchableWithoutFeedback } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Avatar from './Avatar';
+import Colors from '../constants/Colors';
 
 const Container = styled.View`
   padding: 15px 10px;
   border-radius: 15px;
-  border: ${props => (props.unread ? "1px solid #EBEBEB" : "0")};
+  border: ${(props) => (props.unread ? '1px solid #EBEBEB' : '0')};
   flex-direction: row;
   align-items: center;
   margin-bottom: 15px;
@@ -49,8 +49,8 @@ const PreviewContainer = styled.View`
 `;
 
 const PreviewText = styled.Text`
-  font-weight: ${props => (props.unread ? "600" : "400")};
-  margin-right: ${props => (props.unread ? "0px" : "10px")};
+  font-weight: ${(props) => (props.unread ? '600' : '400')};
+  margin-right: ${(props) => (props.unread ? '0px' : '10px')};
 `;
 
 const IconContainer = styled.View`
@@ -66,9 +66,9 @@ const Message = ({
   name,
   timeAgo,
   preview,
-  navigation
+  navigation,
 }) => (
-  <TouchableWithoutFeedback onPress={() => navigation.navigate("Thread")}>
+  <TouchableWithoutFeedback onPress={() => navigation.navigate('Thread')}>
     <Container unread={unread}>
       <AvatarColumn>
         <Avatar source={userAvatar} />
@@ -80,9 +80,9 @@ const Message = ({
           {(delivered || readReceipt) && (
             <IconContainer>
               <Ionicons
-                name={Platform.OS === "ios" ? "ios-checkmark" : "md-checkmark"}
+                name={Platform.OS === 'ios' ? 'ios-checkmark' : 'md-checkmark'}
                 color={delivered ? Colors.tintColor : Colors.greyColor}
-                size={Platform.OS === "ios" ? 28 : 20}
+                size={Platform.OS === 'ios' ? 28 : 20}
               />
             </IconContainer>
           )}
@@ -105,7 +105,7 @@ Message.propTypes = {
   pendingRead: PropTypes.number,
   name: PropTypes.string.isRequired,
   timeAgo: PropTypes.string.isRequired,
-  preview: PropTypes.string.isRequired
+  preview: PropTypes.string.isRequired,
 };
 
 export default withNavigation(Message);

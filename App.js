@@ -1,12 +1,10 @@
-import React from "react";
-import { Platform, StatusBar } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import styled from "styled-components";
-import { AppLoading } from "expo";
-import * as Font from "expo-font";
-import { Asset } from "expo-asset";
+import React from 'react';
+import { Platform, StatusBar } from 'react-native';
+import styled from 'styled-components';
+import { AppLoading } from 'expo';
+import { Asset } from 'expo-asset';
 
-import AppNavigator from "./navigation/AppNavigator";
+import AppNavigator from './navigation/AppNavigator';
 
 const Container = styled.View`
   flex: 1;
@@ -15,19 +13,18 @@ const Container = styled.View`
 
 export default class App extends React.Component {
   state = {
-    isLoadingComplete: false
+    isLoadingComplete: false,
   };
 
   loadResourcesAsync = async () => {
     await Asset.loadAsync([
-      require("./assets/images/authBackground.jpg"),
-      require("./assets/images/smAvatar.png"),
-      require("./assets/images/smAvatar2.png")
+      require('./assets/images/authBackground.jpg'),
+      require('./assets/images/smAvatar.png'),
+      require('./assets/images/smAvatar2.png'),
     ]);
-    await Font.loadAsync(Ionicons.font);
   };
 
-  handleLoadingError = error => {
+  handleLoadingError = (error) => {
     console.warn(error);
   };
 
@@ -48,7 +45,7 @@ export default class App extends React.Component {
     }
     return (
       <Container>
-        {Platform.OS === "ios" && <StatusBar barStyle="default" />}
+        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
         <AppNavigator />
       </Container>
     );

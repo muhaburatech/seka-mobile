@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Ionicons } from "@expo/vector-icons";
-import styled from "styled-components";
-import { Platform, TouchableOpacity } from "react-native";
-import Colors from "../constants/Colors";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import styled from 'styled-components';
+import { Platform, TouchableOpacity } from 'react-native';
+import Colors from '../constants/Colors';
 
 const Container = styled.View`
   border: 1px solid #ebebeb;
@@ -32,7 +32,7 @@ const ChatInput = ({ onFocus }) => (
     <TouchableOpacity>
       <IconContainer>
         <Ionicons
-          name={Platform.OS === "ios" ? "ios-send" : "md-send"}
+          name={Platform.OS === 'ios' ? 'ios-send' : 'md-send'}
           color={Colors.blackColor}
           size={26}
         />
@@ -42,7 +42,7 @@ const ChatInput = ({ onFocus }) => (
 );
 
 ChatInput.propTypes = {
-  onFocus: PropTypes.func
+  onFocus: PropTypes.func,
 };
 
 export default ChatInput;

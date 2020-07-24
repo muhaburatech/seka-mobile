@@ -1,7 +1,7 @@
-import React from "react";
-import { TouchableOpacity, View, Platform } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import ProductScreenPresenter from "./ProductScreenPresenter";
+import React from 'react';
+import { TouchableOpacity, View, Platform } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import ProductScreenPresenter from './ProductScreenPresenter';
 
 export default class extends React.Component {
   static navigationOptions = {
@@ -11,13 +11,13 @@ export default class extends React.Component {
         <View
           style={{
             ...Platform.select({ ios: { heigth: 45 } }),
-            justifyContent: "center",
-            paddingLeft: 20
+            justifyContent: 'center',
+            paddingLeft: 20,
           }}
         >
           <Ionicons
-            name={Platform.OS === "ios" ? "ios-heart-empty" : "md-heart-empty"}
-            size={Platform.OS === "ios" ? 26 : 20}
+            name={Platform.OS === 'ios' ? 'ios-heart-empty' : 'md-heart-empty'}
+            size={Platform.OS === 'ios' ? 26 : 20}
             color="white"
           />
         </View>
@@ -27,14 +27,14 @@ export default class extends React.Component {
       ...Platform.select({
         ios: {
           paddingRight: 9,
-          paddingVertical: 12
+          paddingVertical: 12,
         },
         android: {
           paddingRight: 20,
-          paddingVertical: 12
-        }
-      })
-    }
+          paddingVertical: 12,
+        },
+      }),
+    },
   };
 
   render() {

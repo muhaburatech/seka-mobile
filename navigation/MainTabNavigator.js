@@ -1,28 +1,28 @@
-import React from "react";
-import { Platform } from "react-native";
+import React from 'react';
+import { Platform } from 'react-native';
 import {
   createStackNavigator,
-  createBottomTabNavigator
-} from "react-navigation";
+  createBottomTabNavigator,
+} from 'react-navigation';
 
-import TabBarIcon from "../components/TabBarIcon";
-import HomeScreen from "../screens/HomeScreen";
-import SearchScreen from "../screens/SearchScreen";
-import ProfileScreen from "../screens/ProfileScreen";
-import Colors from "../constants/Colors";
-import MessagesScreen from "../screens/MessagesScreen";
+import TabBarIcon from '../components/TabBarIcon';
+import HomeScreen from '../screens/HomeScreen';
+import SearchScreen from '../screens/SearchScreen';
+import ProfileScreen from '../screens/ProfileScreen';
+import Colors from '../constants/Colors';
+import MessagesScreen from '../screens/MessagesScreen';
 
 const StackNavOptions = {
   headerStyle: { borderBottomColor: Colors.tabBarBorderTop, height: 70 },
-  headerTitleStyle: { fontSize: 14, color: Colors.blackColor }
+  headerTitleStyle: { fontSize: 14, color: Colors.blackColor },
 };
 
 const HomeStack = createStackNavigator(
   {
-    Home: HomeScreen
+    Home: HomeScreen,
   },
   {
-    navigationOptions: { ...StackNavOptions }
+    navigationOptions: { ...StackNavOptions },
   }
 );
 
@@ -30,19 +30,19 @@ HomeStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === "ios" ? `ios-home` : "md-home"}
+      name={Platform.OS === 'ios' ? `ios-home` : 'md-home'}
     />
-  )
+  ),
 };
 
 const SearchStack = createStackNavigator(
   {
-    Search: SearchScreen
+    Search: SearchScreen,
   },
   {
     navigationOptions: {
-      ...StackNavOptions
-    }
+      ...StackNavOptions,
+    },
   }
 );
 
@@ -50,17 +50,17 @@ SearchStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === "ios" ? "ios-search" : "md-search"}
+      name={Platform.OS === 'ios' ? 'ios-search' : 'md-search'}
     />
-  )
+  ),
 };
 
 const MessageStack = createStackNavigator(
   {
-    Messages: MessagesScreen
+    Messages: MessagesScreen,
   },
   {
-    navigationOptions: { ...StackNavOptions }
+    navigationOptions: { ...StackNavOptions },
   }
 );
 
@@ -68,17 +68,17 @@ MessageStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === "ios" ? "ios-text" : "md-text"}
+      name={Platform.OS === 'ios' ? 'ios-text' : 'md-text'}
     />
-  )
+  ),
 };
 
 const ProfileStack = createStackNavigator(
   {
-    Profile: ProfileScreen
+    Profile: ProfileScreen,
   },
   {
-    navigationOptions: { ...StackNavOptions }
+    navigationOptions: { ...StackNavOptions },
   }
 );
 
@@ -86,9 +86,9 @@ ProfileStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === "ios" ? "ios-person" : "md-person"}
+      name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'}
     />
-  )
+  ),
 };
 
 export default createBottomTabNavigator(
@@ -96,15 +96,15 @@ export default createBottomTabNavigator(
     HomeStack,
     SearchStack,
     MessageStack,
-    ProfileStack
+    ProfileStack,
   },
   {
-    initialRouteName: "HomeStack",
+    initialRouteName: 'HomeStack',
     tabBarOptions: {
       showLabel: false,
       style: {
-        borderTopColor: Colors.tabBarBorderTop
-      }
-    }
+        borderTopColor: Colors.tabBarBorderTop,
+      },
+    },
   }
 );

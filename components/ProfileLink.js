@@ -1,9 +1,9 @@
-import React from "react";
-import { Ionicons } from "@expo/vector-icons";
-import PropTypes from "prop-types";
-import { Platform } from "react-native";
-import styled from "styled-components";
-import Colors from "../constants/Colors";
+import React from 'react';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import PropTypes from 'prop-types';
+import { Platform } from 'react-native';
+import styled from 'styled-components';
+import Colors from '../constants/Colors';
 
 const Container = styled.View`
   flex-direction: row;
@@ -35,7 +35,7 @@ const LinkDescription = styled.Text`
   color: ${Colors.greyColor};
 `;
 
-const ICON_SIZE = Platform.OS === "ios" ? 26 : 20;
+const ICON_SIZE = Platform.OS === 'ios' ? 26 : 20;
 
 const ProfileLink = ({ iconName, name, description }) => (
   <Container>
@@ -50,7 +50,7 @@ const ProfileLink = ({ iconName, name, description }) => (
     </Column>
     <IconContainer>
       <Ionicons
-        name={Platform.OS === "ios" ? "ios-arrow-forward" : "md-arrow-forward"}
+        name={Platform.OS === 'ios' ? 'ios-arrow-forward' : 'md-arrow-forward'}
         size={ICON_SIZE}
         color={Colors.greyColor}
       />
@@ -61,7 +61,7 @@ const ProfileLink = ({ iconName, name, description }) => (
 ProfileLink.propTypes = {
   iconName: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired
+  description: PropTypes.string.isRequired,
 };
 
 export default ProfileLink;

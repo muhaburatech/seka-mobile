@@ -1,7 +1,7 @@
-import React from "react";
-import { Ionicons } from "@expo/vector-icons";
+import React from 'react';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import Colors from "../constants/Colors";
+import Colors from '../constants/Colors';
 
 const TabBarIcon = ({ name, focused }) => (
   <Ionicons
