@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { withNavigation } from 'react-navigation';
 import PropTypes from 'prop-types';
 import { Platform, TouchableWithoutFeedback } from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Ionicons } from '@expo/vector-icons';
 import Avatar from './Avatar';
 import Colors from '../constants/Colors';
 
@@ -108,4 +107,4 @@ Message.propTypes = {
   preview: PropTypes.string.isRequired,
 };
 
-export default withNavigation(Message);
+export default Message;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, View, Platform } from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Ionicons } from '@expo/vector-icons';
 import ProductScreenPresenter from './ProductScreenPresenter';
 
 export default class extends React.Component {

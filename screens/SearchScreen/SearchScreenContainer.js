@@ -1,27 +1,27 @@
-import React from "react";
-import { Alert } from "react-native";
-import SearchScreenPresenter from "./SearchScreenPresenter";
-import SearchBar from "../../components/SearchBar";
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import { products } from '../../dummy';
+import SearchScreenPresenter from './SearchScreenPresenter';
+import SearchBar from '../../components/SearchBar';
 
-export default class extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
-    headerTitle: <SearchBar onSubmit={navigation.getParam("onSubmit", null)} />
-  });
+const Stack = createStackNavigator();
 
-  constructor(props) {
-    super(props);
-    props.navigation.setParams({
-      onSubmit: this.onSubmit
-    });
-  }
-
-  onSubmit = text => {
-    setTimeout(() => {
-      Alert.alert(`Searching by: ${text}`);
-    }, 500);
-  };
-
-  render() {
-    return <SearchScreenPresenter />;
-  }
+function SearchScreen() {
+  return <SearchScreenPresenter products={products} />;
 }
+
+const SearchScreenContainer = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        component={SearchScreen}
+        name="Search"
+        options={{
+          headerTitle: () => <SearchBar />,
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+export default SearchScreenContainer;

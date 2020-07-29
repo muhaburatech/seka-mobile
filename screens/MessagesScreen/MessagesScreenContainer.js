@@ -1,12 +1,12 @@
-import React from "react";
-import MessagesScreenPresenter from "./MessagesScreenPresenter";
+// import React from "react";
+// import MessagesScreenPresenter from "./MessagesScreenPresenter";
 
-export default class extends React.Component {
-  static navigationOptions = {
-    title: "Messages"
-  };
+// export default class extends React.Component {
+//   static navigationOptions = {
+//     title: "Messages"
+//   };
 
-  render() {
-    return <MessagesScreenPresenter />;
-  }
-}
+//   render() {
+//     return <MessagesScreenPresenter />;
+//   }
+// }

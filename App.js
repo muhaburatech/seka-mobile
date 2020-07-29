@@ -1,47 +1,63 @@
 import React from 'react';
-import { Platform, StatusBar } from 'react-native';
+import { Platform, StatusBar, Text } from 'react-native';
 import styled from 'styled-components';
-import { AppLoading } from 'expo';
+import * as SplashScreen from 'expo-splash-screen';
 import { Asset } from 'expo-asset';
+import { Provider, connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import AppNavigator from './navigation/AppNavigator';
+import store from './redux/store';
+import {
+  getProducts,
+  getProductsError,
+  getProductsPending,
+} from './redux/reducers/product';
+import fetchProductsAction from './redux/actions/product/fetchProducts';
 
 const Container = styled.View`
   flex: 1;
   background-color: white;
 `;
 
-export default class App extends React.Component {
+class App extends React.Component {
   state = {
-    isLoadingComplete: false,
+    appIsReady: false,
   };
 
-  loadResourcesAsync = async () => {
+  async componentDidMount() {
+    // Prevent native splash screen from autohiding
+    try {
+      await SplashScreen.preventAutoHideAsync();
+    } catch (e) {
+      console.warn(e);
+    }
+    this.prepareResources();
+  }
+
+  /**
+   * Method that serves to load resources and make API calls
+   */
+  prepareResources = async () => {
+    const { fetchProducts } = this.props;
+
     await Asset.loadAsync([
       require('./assets/images/authBackground.jpg'),
       require('./assets/images/smAvatar.png'),
       require('./assets/images/smAvatar2.png'),
     ]);
-  };
+    await fetchProducts();
 
-  handleLoadingError = (error) => {
-    console.warn(error);
-  };
-
-  handleFinishLoading = () => {
-    this.setState({ isLoadingComplete: true });
+    this.setState({ appIsReady: true }, async () => {
+      await SplashScreen.hideAsync();
+    });
   };
 
   render() {
-    const { isLoadingComplete } = this.state;
-    if (!isLoadingComplete) {
-      return (
-        <AppLoading
-          startAsync={this.loadResourcesAsync}
-          onError={this.handleLoadingError}
-          onFinish={this.handleFinishLoading}
-        />
-      );
+    // const { isLoadingComplete, products } = this.state;
+    console.log('this.state :>> ', this.props);
+    if (!this.state.appIsReady) {
+      return <Text>starting app</Text>;
     }
     return (
       <Container>
@@ -50,4 +66,28 @@ export default class App extends React.Component {
       </Container>
     );
   }
+}
+
+function mapStateToProps(state) {
+  return {
+    products: state.productsReducer.products,
+  };
+}
+
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      fetchProducts: fetchProductsAction,
+    },
+    dispatch
+  );
+
+const ToBeReduxWrapped = connect(mapStateToProps, mapDispatchToProps)(App);
+
+export default function WrappedApp() {
+  return (
+    <Provider store={store}>
+      <ToBeReduxWrapped />
+    </Provider>
+  );
 }

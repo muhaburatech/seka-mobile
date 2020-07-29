@@ -1,12 +1,12 @@
-import { createStackNavigator } from "react-navigation";
-import { Platform } from "react-native";
-import LoginScreen from "../screens/LoginScreen";
-import SignupScreen from "../screens/SignupScreen";
+import { createStackNavigator } from 'react-navigation';
+import { Platform } from 'react-native';
+import LoginScreen from '../screens/LoginScreen';
+import SignupScreen from '../screens/SignupScreen';
 
-const fade = props => {
+const fade = (props) => {
   const {
     position,
-    scene: { index }
+    scene: { index },
   } = props;
 
   const translateX = 0;
@@ -14,29 +14,29 @@ const fade = props => {
 
   const opacity = position.interpolate({
     inputRange: [index - 0.7, index, index + 0.7],
-    outputRange: [0.3, 1, 0.3]
+    outputRange: [0.3, 1, 0.3],
   });
 
   return {
     opacity,
-    transform: [{ translateX }, { translateY }]
+    transform: [{ translateX }, { translateY }],
   };
 };
 
 export default createStackNavigator(
   {
     Signup: SignupScreen,
-    Login: LoginScreen
+    Login: LoginScreen,
   },
   {
-    initialRouteName: "Signup",
-    headerMode: "none",
+    initialRouteName: 'Signup',
+    headerMode: 'none',
     ...Platform.select({
       ios: {
         transitionConfig: () => ({
-          screenInterpolator: props => fade(props)
-        })
-      }
-    })
+          screenInterpolator: (props) => fade(props),
+        }),
+      },
+    }),
   }
 );

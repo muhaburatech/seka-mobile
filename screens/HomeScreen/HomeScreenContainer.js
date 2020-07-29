@@ -1,12 +1,37 @@
-import React from "react";
-import HomeScreenPresenter from "./HomeScreenPresenter";
+import React, { useState } from 'react';
+import HomeScreenPresenter from './HomeScreenPresenter';
+import SearchBar from '../../components/SearchBar';
 
-export default class extends React.Component {
-  static navigationOptions = {
-    title: "Recently Added"
+import { createStackNavigator } from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
+
+function Home() {
+  const [currentTab, setCurrentTab] = useState('All');
+
+  const _handleCategoryChange = (activeTab) => {
+    setCurrentTab(activeTab);
   };
-
-  render() {
-    return <HomeScreenPresenter />;
-  }
+  return (
+    <HomeScreenPresenter
+      currentTab={currentTab}
+      handleCategoryChange={_handleCategoryChange}
+    />
+  );
 }
+
+const HomeScreen = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{
+          headerTitle: () => <SearchBar />,
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+export default HomeScreen;

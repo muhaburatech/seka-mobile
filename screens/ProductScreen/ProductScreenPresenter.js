@@ -1,10 +1,10 @@
-import React from "react";
-import { StatusBar } from "react-native";
-import styled from "styled-components";
-import Swiper from "react-native-swiper";
-import Layout from "../../constants/Layout";
-import Colors from "../../constants/Colors";
-import UserPartials from "../../components/UserPartials";
+import React from 'react';
+import { StatusBar } from 'react-native';
+import styled from 'styled-components';
+import Swiper from 'react-native-swiper';
+import Layout from '../../constants/Layout';
+import Colors from '../../constants/Colors';
+import UserPartials from '../../components/UserPartials';
 
 const getHeight = () =>
   Layout.window.height <= 667
@@ -76,19 +76,19 @@ const ProductScreenPresenter = () => (
         <Image
           source={{
             uri:
-              "https://i.pinimg.com/564x/8f/27/44/8f27446e4f69541cb465e50b93dae15e.jpg"
+              'https://i.pinimg.com/564x/8f/27/44/8f27446e4f69541cb465e50b93dae15e.jpg',
           }}
         />
         <Image
           source={{
             uri:
-              "https://i.pinimg.com/564x/6e/90/41/6e90412772257e9d16b18f6449d0b141.jpg"
+              'https://i.pinimg.com/564x/6e/90/41/6e90412772257e9d16b18f6449d0b141.jpg',
           }}
         />
         <Image
           source={{
             uri:
-              "https://i.pinimg.com/564x/48/8a/ce/488acec32b6c8cf86fc034476b17b2bc.jpg"
+              'https://i.pinimg.com/564x/48/8a/ce/488acec32b6c8cf86fc034476b17b2bc.jpg',
           }}
         />
       </Swiper>
@@ -112,7 +112,7 @@ const ProductScreenPresenter = () => (
         <UserPartials
           name="Keith Mills"
           rating={4.6}
-          avatarUrl={require("../../assets/images/smAvatar.png")}
+          avatarUrl={require('../../assets/images/smAvatar.png')}
         />
       </DataContainer>
     </ScrollView>

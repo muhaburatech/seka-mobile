@@ -1,7 +1,7 @@
 import React from 'react';
 import { Platform, TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Ionicons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 import Colors from '../../constants/Colors';
 

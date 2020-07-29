@@ -1,14 +1,14 @@
-import React from "react";
-import { TouchableWithoutFeedback } from "react-native";
-import AutoHeightImage from "react-native-auto-height-image";
-import { withNavigation } from "react-navigation";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import Layout from "../constants/Layout";
-import Colors from "../constants/Colors";
+import React from 'react';
+import { TouchableWithoutFeedback } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import AutoHeightImage from 'react-native-auto-height-image';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import Layout from '../constants/Layout';
+import Colors from '../constants/Colors';
 
 const Container = styled.View`
-  margin-bottom: 20px;
+  padding-bottom: 15;
 `;
 
 const ImageContainer = styled.View`
@@ -32,28 +32,30 @@ const Price = styled.Text`
   color: ${Colors.blackColor};
 `;
 
-const ProductCard = ({ imgSrc, name, price, navigation }) => (
-  <TouchableWithoutFeedback onPress={() => navigation.navigate("Product")}>
-    <Container>
-      <ImageContainer>
-        <AutoHeightImage
-          width={Layout.window.width / 2 - 30}
-          source={{ uri: imgSrc }}
-          style={{
-            borderRadius: 15
-          }}
-        />
-      </ImageContainer>
-      <Name>{name}</Name>
-      <Price>{`$${price}`}</Price>
-    </Container>
-  </TouchableWithoutFeedback>
-);
-
+const ProductCard = ({ imgSrc, name, price }) => {
+  const navigation = useNavigation();
+  return (
+    <TouchableWithoutFeedback onPress={() => navigation.navigate('Product')}>
+      <Container>
+        <ImageContainer>
+          <AutoHeightImage
+            width={Layout.window.width / 2 - 30}
+            source={{ uri: imgSrc }}
+            style={{
+              borderRadius: 15,
+            }}
+          />
+        </ImageContainer>
+        <Name>{name}</Name>
+        <Price>{`$${price}`}</Price>
+      </Container>
+    </TouchableWithoutFeedback>
+  );
+};
 ProductCard.propTypes = {
   imgSrc: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired
+  price: PropTypes.string.isRequired,
 };
 
-export default withNavigation(ProductCard);
+export default ProductCard;

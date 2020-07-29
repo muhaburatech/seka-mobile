@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Ionicons } from '@expo/vector-icons';
 import BigButton from './BigButton';
 
 const Text = styled.Text`
