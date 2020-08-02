@@ -1,8 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import CartPresenter from './CartScreenPresentater';
 
-const CartContainer = () => {
-  return <CartPresenter />;
+const CartContainer = ({ cartItems }) => {
+  return <CartPresenter cartItems={cartItems} />;
 };
 
-export default CartContainer;
+const mapStateToProps = ({ cart }) => {
+  return {
+    cartItems: cart,
+  };
+};
+
+export default connect(mapStateToProps)(CartContainer);

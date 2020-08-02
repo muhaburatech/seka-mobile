@@ -1,8 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import CategoryHeaderPresenter from './CategoryHeaderPresenter';
-import { categories } from '../../dummy';
 
-const CategoryHeaderContainer = ({ currentTab, handleCategoryChange }) => {
+const CategoryHeaderContainer = ({
+  currentTab,
+  handleCategoryChange,
+  categories,
+}) => {
   return (
     <CategoryHeaderPresenter
       currentTab={currentTab}
@@ -12,4 +16,10 @@ const CategoryHeaderContainer = ({ currentTab, handleCategoryChange }) => {
   );
 };
 
-export default CategoryHeaderContainer;
+function mapStateToProps({ categories: { categories } }) {
+  return {
+    categories,
+  };
+}
+
+export default connect(mapStateToProps)(CategoryHeaderContainer);

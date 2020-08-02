@@ -12,19 +12,14 @@ const splitArray = (arr) => {
 };
 
 const MasonryProducts = ({ products, heading }) => {
-  const { firstHalf } = splitArray(products);
   return (
     <View>
       <Text style={style.heading}>{heading}</Text>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-        {firstHalf.map((product) => {
+        {products.map((product) => {
           return (
-            <View style={{ margin: 20 }} key={product.name}>
-              <ProductCard
-                imgSrc={product.uri}
-                price={product.price}
-                name={product.name}
-              />
+            <View style={{ margin: 20 }} key={product.Title}>
+              <ProductCard product={product} />
             </View>
           );
         })}

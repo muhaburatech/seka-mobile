@@ -1,43 +1,31 @@
-import React from 'react';
-import { TouchableOpacity, View, Platform } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 import ProductScreenPresenter from './ProductScreenPresenter';
+import { addItemToCart, clearCartInfo } from '../../redux/actions/cart/actions';
 
-export default class extends React.Component {
-  static navigationOptions = {
-    headerTransparent: true,
-    headerRight: (
-      <TouchableOpacity>
-        <View
-          style={{
-            ...Platform.select({ ios: { heigth: 45 } }),
-            justifyContent: 'center',
-            paddingLeft: 20,
-          }}
-        >
-          <Ionicons
-            name={Platform.OS === 'ios' ? 'ios-heart-empty' : 'md-heart-empty'}
-            size={Platform.OS === 'ios' ? 26 : 20}
-            color="white"
-          />
-        </View>
-      </TouchableOpacity>
-    ),
-    headerRightContainerStyle: {
-      ...Platform.select({
-        ios: {
-          paddingRight: 9,
-          paddingVertical: 12,
-        },
-        android: {
-          paddingRight: 20,
-          paddingVertical: 12,
-        },
-      }),
-    },
-  };
+const ProductScreenContainer = ({ route, dispatch }) => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const navigation = useNavigation();
 
-  render() {
-    return <ProductScreenPresenter />;
+  function handleAddToCart(item) {
+    setModalVisible(true);
+    dispatch(addItemToCart(item));
   }
-}
+
+  function toggleModal() {
+    setModalVisible(!modalVisible);
+    navigation.navigate('Home');
+  }
+
+  return (
+    <ProductScreenPresenter
+      handleAddToCart={handleAddToCart}
+      productDetails={route.params}
+      modalVisible={modalVisible}
+      handlePressOk={toggleModal}
+    />
+  );
+};
+
+export default connect()(ProductScreenContainer);

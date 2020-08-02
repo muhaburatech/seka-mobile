@@ -1,5 +1,9 @@
-import { productsReducer } from './product';
+import products from './product';
+import categories from './category';
+import cart from './cart';
 
 export default {
-  productsReducer,
+  products,
+  categories,
+  cart,
 };

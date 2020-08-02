@@ -1,18 +1,19 @@
-import React from "react";
-import { TouchableOpacity } from "react-native";
-import styled from "styled-components";
-import PropTypes from "prop-types";
-import Colors from "../constants/Colors";
+import React from 'react';
+import { TouchableOpacity } from 'react-native';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import Colors from '../constants/Colors';
 
 const Container = styled.View`
-  background-color: ${props =>
+  background-color: ${(props) =>
     props.accent ? Colors.tintColor : Colors.lightGreyColor};
   padding: 10px 15px;
   border-radius: 20px;
+  height: 44px;
 `;
 
 const Text = styled.Text`
-  color: ${props => (props.accent ? "white" : Colors.blackColor)};
+  color: ${(props) => (props.accent ? 'white' : Colors.blackColor)};
   font-weight: 500;
 `;
 
@@ -27,7 +28,7 @@ const SmallButton = ({ text, accent = false, onPress = null }) => (
 SmallButton.propTypes = {
   text: PropTypes.string.isRequired,
   accent: PropTypes.bool,
-  onPress: PropTypes.func
+  onPress: PropTypes.func,
 };
 
 export default SmallButton;

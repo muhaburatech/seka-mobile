@@ -32,30 +32,27 @@ const Price = styled.Text`
   color: ${Colors.blackColor};
 `;
 
-const ProductCard = ({ imgSrc, name, price }) => {
+const ProductCard = ({ product }) => {
   const navigation = useNavigation();
   return (
-    <TouchableWithoutFeedback onPress={() => navigation.navigate('Product')}>
+    <TouchableWithoutFeedback
+      onPress={() => navigation.navigate('Product', product)}
+    >
       <Container>
         <ImageContainer>
           <AutoHeightImage
             width={Layout.window.width / 2 - 30}
-            source={{ uri: imgSrc }}
+            source={{ uri: product.Image[0]['url'] }}
             style={{
               borderRadius: 15,
             }}
           />
         </ImageContainer>
-        <Name>{name}</Name>
-        <Price>{`$${price}`}</Price>
+        <Name>{product.Title}</Name>
+        <Price>{`RWF ${product.Price}`}</Price>
       </Container>
     </TouchableWithoutFeedback>
   );
-};
-ProductCard.propTypes = {
-  imgSrc: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
 };
 
 export default ProductCard;

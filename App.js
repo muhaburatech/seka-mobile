@@ -5,15 +5,12 @@ import * as SplashScreen from 'expo-splash-screen';
 import { Asset } from 'expo-asset';
 import { Provider, connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import AppNavigator from './navigation/AppNavigator';
-import store from './redux/store';
-import {
-  getProducts,
-  getProductsError,
-  getProductsPending,
-} from './redux/reducers/product';
+import { store, persistor } from './redux/store';
 import fetchProductsAction from './redux/actions/product/fetchProducts';
+import fetchCategoriesAction from './redux/actions/categories/fetchCategories';
 
 const Container = styled.View`
   flex: 1;
@@ -39,7 +36,7 @@ class App extends React.Component {
    * Method that serves to load resources and make API calls
    */
   prepareResources = async () => {
-    const { fetchProducts } = this.props;
+    const { fetchProducts, fetchCategories } = this.props;
 
     await Asset.loadAsync([
       require('./assets/images/authBackground.jpg'),
@@ -47,15 +44,13 @@ class App extends React.Component {
       require('./assets/images/smAvatar2.png'),
     ]);
     await fetchProducts();
-
+    await fetchCategories();
     this.setState({ appIsReady: true }, async () => {
       await SplashScreen.hideAsync();
     });
   };
 
   render() {
-    // const { isLoadingComplete, products } = this.state;
-    console.log('this.state :>> ', this.props);
     if (!this.state.appIsReady) {
       return <Text>starting app</Text>;
     }
@@ -70,7 +65,7 @@ class App extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    products: state.productsReducer.products,
+    products: state.products.products,
   };
 }
 
@@ -78,6 +73,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       fetchProducts: fetchProductsAction,
+      fetchCategories: fetchCategoriesAction,
     },
     dispatch
   );
@@ -87,7 +83,9 @@ const ToBeReduxWrapped = connect(mapStateToProps, mapDispatchToProps)(App);
 export default function WrappedApp() {
   return (
     <Provider store={store}>
-      <ToBeReduxWrapped />
+      <PersistGate loading={null} persistor={persistor}>
+        <ToBeReduxWrapped />
+      </PersistGate>
     </Provider>
   );
 }

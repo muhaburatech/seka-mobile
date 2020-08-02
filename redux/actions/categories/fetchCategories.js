@@ -1,13 +1,13 @@
 import {
-  fetchProductsPending,
-  fetchProductsSuccess,
-  fetchProductsError,
+  fetchCategoriesPending,
+  fetchCategoriesSuccess,
+  fetchCategoriesError,
 } from './action';
 
-function fetchProducts() {
+function fettchCategories() {
   return (dispatch) => {
-    dispatch(fetchProductsPending());
-    fetch(`http://192.168.1.65:1337/products`, {
+    dispatch(fetchCategoriesPending());
+    fetch(`http://192.168.1.65:1337/categories`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -18,13 +18,13 @@ function fetchProducts() {
         if (res.error) {
           throw res.error;
         }
-        dispatch(fetchProductsSuccess(res));
+        dispatch(fetchCategoriesSuccess(res));
         return res;
       })
       .catch((error) => {
-        dispatch(fetchProductsError(error));
+        dispatch(fetchCategoriesError(error));
       });
   };
 }
 
-export default fetchProducts;
+export default fettchCategories;

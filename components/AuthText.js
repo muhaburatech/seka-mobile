@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import { TouchableOpacity } from "react-native";
-import { withNavigation } from "react-navigation";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const Container = styled.View`
   flex-direction: row;
@@ -18,18 +18,21 @@ const LinkText = styled.Text`
   font-weight: 600;
 `;
 
-const AuthText = ({ text, link, screenName, navigation }) => (
-  <Container>
-    <Text>{text}</Text>
-    <TouchableOpacity onPress={() => navigation.navigate(screenName)}>
-      <LinkText>{link}</LinkText>
-    </TouchableOpacity>
-  </Container>
-);
+const AuthText = ({ text, link, screenName }) => {
+  const navigation = useNavigation();
+  return (
+    <Container>
+      <Text>{text}</Text>
+      <TouchableOpacity onPress={() => navigation.navigate(screenName)}>
+        <LinkText>{link}</LinkText>
+      </TouchableOpacity>
+    </Container>
+  );
+};
 
 AuthText.propTypes = {
   text: PropTypes.string.isRequired,
-  link: PropTypes.string.isRequired
+  link: PropTypes.string.isRequired,
 };
 
-export default withNavigation(AuthText);
+export default AuthText;

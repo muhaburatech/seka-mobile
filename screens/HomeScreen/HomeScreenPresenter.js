@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { products } from '../../dummy';
 import MasonryProducts from '../../components/MasonryProducts';
 import CategoryHeader from '../../components/CategoryHeader/';
 import { ScrollView } from 'react-native';
@@ -10,18 +9,30 @@ const Container = styled.View`
   flex: 1;
 `;
 
-const HomeScreenPresenter = ({ currentTab, handleCategoryChange }) => (
-  <Container>
-    <CategoryHeader
-      currentTab={currentTab}
-      handleCategoryChange={handleCategoryChange}
-    />
-    <ScrollView>
-      <MasonryProducts products={products} heading="Popular Products" />
-      <MasonryProducts products={products} heading="Best Selling" />
-      <MasonryProducts products={products} heading="Featured Products" />
-    </ScrollView>
-  </Container>
-);
+const HomeScreenPresenter = ({
+  currentTab,
+  handleCategoryChange,
+  featuredProducts,
+  bestSellingProducts,
+}) => {
+  return (
+    <Container>
+      <CategoryHeader
+        currentTab={currentTab}
+        handleCategoryChange={handleCategoryChange}
+      />
+      <ScrollView>
+        <MasonryProducts
+          products={featuredProducts}
+          heading="Featured Products"
+        />
+        <MasonryProducts
+          products={bestSellingProducts}
+          heading="Best Selling"
+        />
+      </ScrollView>
+    </Container>
+  );
+};
 
 export default HomeScreenPresenter;

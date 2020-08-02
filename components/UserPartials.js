@@ -1,14 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import Avatar from "./Avatar";
-import Colors from "../constants/Colors";
-import SmallButton from "./SmallButton";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import NumericInput from 'react-native-numeric-input';
+import SmallButton from './SmallButton';
+import Colors from '../constants/Colors';
 
 const Container = styled.View`
   flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  align-items: stretch;
+  justify-content: space-around;
 `;
 
 const Column = styled.View`
@@ -17,45 +16,32 @@ const Column = styled.View`
   justify-content: space-between;
 `;
 
-const DataContainer = styled.View`
-  margin-left: 10px;
-`;
-
-const Name = styled.Text`
-  font-weight: 500;
-  font-size: 16px;
-`;
-
-const Rating = styled.Text`
-  color: ${Colors.greyColor};
-`;
-
-const FirstButtonContainer = styled.View`
-  margin-right: 2.5%;
-`;
-
-const UserPartials = ({ avatarUrl, rating, name }) => (
-  <Container>
-    <Column>
-      <Avatar source={avatarUrl} />
-      <DataContainer>
-        <Name>{name}</Name>
-        <Rating>{`⭑ ${rating}`}</Rating>
-      </DataContainer>
-    </Column>
-    <Column>
-      <FirstButtonContainer>
-        <SmallButton text="Message" />
-      </FirstButtonContainer>
-      <SmallButton text="Buy Now" accent />
-    </Column>
-  </Container>
-);
-
-UserPartials.propTypes = {
-  avatarUrl: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
-  rating: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired
+const UserPartials = ({ handleAddToCart, productDetails }) => {
+  const [itemsToAddCart, setItemsToAddCart] = useState(1);
+  const product = {
+    id: productDetails.id,
+    count: itemsToAddCart,
+    image: productDetails.Image[0].url,
+    title: productDetails.Title,
+    price: productDetails.Price,
+  };
+  return (
+    <Container>
+      <NumericInput
+        value={itemsToAddCart}
+        rightButtonBackgroundColor={`${Colors.tintColor}`}
+        minValue={1}
+        leftButtonBackgroundColor={`${Colors.tintColor}`}
+        iconStyle={{ color: 'white' }}
+        onChange={(value) => setItemsToAddCart(value)}
+      />
+      <SmallButton
+        onPress={() => handleAddToCart(product)}
+        text="Add to cart"
+        accent
+      />
+    </Container>
+  );
 };
 
 export default UserPartials;

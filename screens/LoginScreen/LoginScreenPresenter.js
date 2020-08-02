@@ -1,13 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import { withNavigation } from "react-navigation";
-import { StatusBar } from "react-native";
-import Layout from "../../constants/Layout";
-import SocialLogin from "../../components/SocialLogin";
-import AuthText from "../../components/AuthText";
-import AuthInput from "../../components/AuthInput";
-import AuthButton from "../../components/AuthButton";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { useNavigation } from '@react-navigation/native';
+import { StatusBar } from 'react-native';
+import Layout from '../../constants/Layout';
+import SocialLogin from '../../components/SocialLogin';
+import AuthText from '../../components/AuthText';
+import AuthInput from '../../components/AuthInput';
+import AuthButton from '../../components/AuthButton';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const Container = styled.View`
   align-items: center;
@@ -23,6 +24,7 @@ const ImageBg = styled.Image`
 `;
 
 const ButtonsContainer = styled.View`
+  margin-top: 20;
   justify-content: flex-end;
   flex: 1;
   width: 80%;
@@ -48,55 +50,55 @@ const EmailAuthForm = styled.View`
   margin-bottom: 25px;
 `;
 
-const LoginScreenPresenter = ({
-  email = "",
-  password = "",
-  onInputChange,
-  navigation
-}) => (
-  <Container>
-    <ImageBg
-      source={require("../../assets/images/authBackground.jpg")}
-      resizeMode="cover"
-    />
-    <StatusBar barStyle="light-content" />
-    <ButtonsContainer>
-      <SocialLogin />
-      <Divider>or</Divider>
-      <EmailAuth behavior="padding" enabled>
-        <EmailAuthForm>
-          <AuthInput
-            name="email"
-            placeholder="Email"
-            value={email}
-            keyboardType="email-address"
-            onChange={onInputChange}
-          />
-          <AuthInput
-            name="password"
-            placeholder="Password"
-            value={password}
-            password
-            onChange={onInputChange}
-          />
-          <AuthButton
-            transparent={false}
-            text="Login"
-            onPress={() => navigation.navigate("Main")}
-          />
-        </EmailAuthForm>
-      </EmailAuth>
-      <AuthTextContainer>
-        <AuthText text="New user? " link="Signup now" screenName="Signup" />
-      </AuthTextContainer>
-    </ButtonsContainer>
-  </Container>
-);
+const LoginScreenPresenter = ({ email = '', password = '', onInputChange }) => {
+  const navigation = useNavigation();
+  return (
+    <Container>
+      <ImageBg
+        source={require('../../assets/images/authBackground.jpg')}
+        resizeMode="cover"
+      />
+      <StatusBar barStyle="light-content" />
+      <ButtonsContainer>
+        <ScrollView>
+          <SocialLogin />
+          <Divider>or</Divider>
+          <EmailAuth behavior="padding" enabled>
+            <EmailAuthForm>
+              <AuthInput
+                name="email"
+                placeholder="Email"
+                value={email}
+                keyboardType="email-address"
+                onChange={onInputChange}
+              />
+              <AuthInput
+                name="password"
+                placeholder="Password"
+                value={password}
+                password
+                onChange={onInputChange}
+              />
+              <AuthButton
+                transparent={false}
+                text="Login"
+                onPress={() => navigation.navigate('Payment')}
+              />
+            </EmailAuthForm>
+          </EmailAuth>
+          <AuthTextContainer>
+            <AuthText text="New user? " link="Signup now" screenName="Signup" />
+          </AuthTextContainer>
+        </ScrollView>
+      </ButtonsContainer>
+    </Container>
+  );
+};
 
 LoginScreenPresenter.propTypes = {
   onInputChange: PropTypes.func.isRequired,
   email: PropTypes.string,
-  password: PropTypes.string
+  password: PropTypes.string,
 };
 
-export default withNavigation(LoginScreenPresenter);
+export default LoginScreenPresenter;

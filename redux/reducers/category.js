@@ -1,29 +1,29 @@
 import {
-  FETCH_PRODUCTS_PENDING,
-  FETCH_PRODUCTS_SUCCESS,
-  FETCH_PRODUCTS_ERROR,
-} from '../actions/product/action';
+  FETCH_CATEGORIES_PENDING,
+  FETCH_CATEGORIES_SUCCESS,
+  FETCH_CATEGORIES_ERROR,
+} from '../actions/categories/action';
 
 const initialState = {
   pending: false,
-  products: [],
+  categories: [],
   error: null,
 };
 
-export default function products(state = initialState, action) {
+export default function categories(state = initialState, action) {
   switch (action.type) {
-    case FETCH_PRODUCTS_PENDING:
+    case FETCH_CATEGORIES_PENDING:
       return {
         ...state,
         pending: true,
       };
-    case FETCH_PRODUCTS_SUCCESS:
+    case FETCH_CATEGORIES_SUCCESS:
       return {
         ...state,
         pending: false,
-        products: action.products,
+        categories: action.categories,
       };
-    case FETCH_PRODUCTS_ERROR:
+    case FETCH_CATEGORIES_ERROR:
       return {
         ...state,
         pending: false,
