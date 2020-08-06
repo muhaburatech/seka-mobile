@@ -1,18 +1,26 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import MapContainer from './MapContainer';
+import { connect } from 'react-redux';
 import {
   ScrollView,
   TouchableWithoutFeedback,
 } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 
+import SavedLocation from '../../components/SavedLocation';
 import Colors from '../../constants/Colors';
+import GooglePlacesInput from './GooglePlaces';
+import FormatLocation from './FormatLocation/index';
 import SmallButton from '../../components/SmallButton';
 
 const TabView = ({ currentTab, handleCategoryChange }) => {
   return (
-    <ScrollView horizontal={true}>
+    <ScrollView
+      horizontal={true}
+      style={{
+        marginBottom: 20,
+      }}
+    >
       <TouchableWithoutFeedback
         onPress={() => handleCategoryChange('Your Locations')}
       >
@@ -23,7 +31,7 @@ const TabView = ({ currentTab, handleCategoryChange }) => {
               currentTab === 'Your Locations' && style.tabLinkActive,
             ]}
           >
-            Your Location
+            Saved Locations
           </Text>
         </View>
       </TouchableWithoutFeedback>
@@ -37,7 +45,7 @@ const TabView = ({ currentTab, handleCategoryChange }) => {
               currentTab === 'Find Location' && style.tabLinkActive,
             ]}
           >
-            Find Location
+            Add a Location
           </Text>
         </View>
       </TouchableWithoutFeedback>
@@ -45,30 +53,64 @@ const TabView = ({ currentTab, handleCategoryChange }) => {
   );
 };
 
-const LocationScreen = () => {
+const LocationScreen = ({ savedLocations }) => {
   const navigation = useNavigation();
   const [currentTab, setCurrentTab] = useState('Your Locations');
-
+  const [region, setRegion] = useState(null);
+  const [showFormatLocation, setShowFormatLocation] = useState(false);
   const _handleCategoryChange = (activeTab) => {
     setCurrentTab(activeTab);
   };
 
+  function notifyChange(loc) {
+    setRegion(loc);
+    if (loc) setShowFormatLocation(true);
+  }
+
   return (
-    <View>
+    <View style={style.container}>
       <TabView
         currentTab={currentTab}
         handleCategoryChange={_handleCategoryChange}
       />
       {currentTab === 'Your Locations' ? (
         <View>
-          <SmallButton
-            text="Proceed to login"
-            onPress={() => navigation.navigate('Login')}
-            accent
-          />
+          {savedLocations.length === 0 ? (
+            <Text>No saved locations</Text>
+          ) : (
+            savedLocations.map((location) => {
+              return <SavedLocation key={location.id} location={location} />;
+            })
+          )}
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'stretch',
+              justifyContent: 'space-around',
+              marginBottom: 30,
+            }}
+          >
+            <SmallButton
+              text="Place your order"
+              accent
+              onPress={() => navigation.navigate('Verify Phone')}
+            />
+          </View>
         </View>
       ) : (
-        <MapContainer />
+        <ScrollView keyboardShouldPersistTaps="always">
+          <GooglePlacesInput notifyChange={notifyChange} />
+          {showFormatLocation && (
+            <FormatLocation
+              id={region.id}
+              location_name={region.main_text}
+              district={region.district}
+              street={region.street}
+              phone_number=""
+              house_number=""
+            />
+          )}
+        </ScrollView>
       )}
     </View>
   );
@@ -97,4 +139,10 @@ const style = StyleSheet.create({
   },
 });
 
-export default LocationScreen;
+const mapStateToProps = ({ location }) => {
+  return {
+    savedLocations: location,
+  };
+};
+
+export default connect(mapStateToProps)(LocationScreen);

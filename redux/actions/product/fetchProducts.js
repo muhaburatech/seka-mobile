@@ -3,11 +3,12 @@ import {
   fetchProductsSuccess,
   fetchProductsError,
 } from './action';
+import { backendUrl } from '../../../constants/server';
 
 function fetchProducts() {
   return (dispatch) => {
     dispatch(fetchProductsPending());
-    fetch(`http://192.168.1.65:1337/products`, {
+    fetch(`${backendUrl}/products`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

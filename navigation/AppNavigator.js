@@ -7,6 +7,7 @@ import ProductScreen from '../screens/ProductScreen';
 import LocationScreen from '../screens/LocationScreen';
 import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignupScreen';
+import OTP from '../screens/OTPScreen/PhoneInput';
 
 const Stack = createStackNavigator();
 
@@ -17,6 +18,7 @@ const Navigator = () => {
         <Stack.Screen name="Home" component={MainTabNavigator} />
         <Stack.Screen name="Product" component={ProductScreen} />
         <Stack.Screen name="Location" component={LocationScreen} />
+        <Stack.Screen name="Verify Phone" component={OTP} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Signup" component={SignupScreen} />
       </Stack.Navigator>

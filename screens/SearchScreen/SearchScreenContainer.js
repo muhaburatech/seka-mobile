@@ -1,27 +1,39 @@
-import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import { products } from '../../dummy';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import SearchScreenPresenter from './SearchScreenPresenter';
-import SearchBar from '../../components/SearchBar';
 
-const Stack = createStackNavigator();
+function SearchScreenContainer({ products }) {
+  const [searchInput, setSearchInput] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
 
-function SearchScreen() {
-  return <SearchScreenPresenter products={products} />;
+  function handleSearchInputChange(input) {
+    return setSearchInput(input);
+  }
+
+  useEffect(() => {
+    setSearchResults(
+      products.filter((product) => {
+        return (
+          product.Title.toLowerCase().includes(searchInput.toLowerCase()) ||
+          product.Description.toLowerCase().includes(searchInput.toLowerCase())
+        );
+      })
+    );
+  }, [searchInput]);
+
+  return (
+    <SearchScreenPresenter
+      searchInput={searchInput}
+      handleInputChange={handleSearchInputChange}
+      searchResults={searchResults}
+    />
+  );
 }
 
-const SearchScreenContainer = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        component={SearchScreen}
-        name="Search"
-        options={{
-          headerTitle: () => <SearchBar />,
-        }}
-      />
-    </Stack.Navigator>
-  );
+const mapStateToProps = (state) => {
+  return {
+    products: state.products.products,
+  };
 };
 
-export default SearchScreenContainer;
+export default connect(mapStateToProps)(SearchScreenContainer);

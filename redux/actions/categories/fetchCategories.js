@@ -3,11 +3,12 @@ import {
   fetchCategoriesSuccess,
   fetchCategoriesError,
 } from './action';
+import { backendUrl } from '../../../constants/server';
 
-function fettchCategories() {
+function fetchCategories() {
   return (dispatch) => {
     dispatch(fetchCategoriesPending());
-    fetch(`http://192.168.1.65:1337/categories`, {
+    fetch(`${backendUrl}/categories`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -27,4 +28,4 @@ function fettchCategories() {
   };
 }
 
-export default fettchCategories;
+export default fetchCategories;

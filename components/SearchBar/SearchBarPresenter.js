@@ -7,6 +7,7 @@ import Colors from '../../constants/Colors';
 
 const Container = styled.View`
   flex: 1;
+  margin-top: 80;
   padding-horizontal: 20px;
   position: relative;
   flex-direction: row;
@@ -31,7 +32,7 @@ const XButton = styled.View`
   z-index: 10;
 `;
 
-const SearchBarPresenter = ({ onSubmit, value, updateValue, clearValue }) => (
+const SearchBarPresenter = ({ onSubmit, value, updateValue }) => (
   <Container>
     <Input
       value={value}
@@ -42,22 +43,15 @@ const SearchBarPresenter = ({ onSubmit, value, updateValue, clearValue }) => (
       returnKeyType="search"
       underlineColorAndroid="white"
     />
-    <TouchableOpacity onPressIn={clearValue}>
+    {/* <TouchableOpacity onPressIn={clearValue}>
       <XButton>
         <Ionicons
           size={30}
           name={Platform.OS === 'ios' ? 'ios-close' : 'md-close'}
         />
       </XButton>
-    </TouchableOpacity>
+    </TouchableOpacity> */}
   </Container>
 );
-
-SearchBarPresenter.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
-  updateValue: PropTypes.func.isRequired,
-  clearValue: PropTypes.func.isRequired,
-};
 
 export default SearchBarPresenter;
