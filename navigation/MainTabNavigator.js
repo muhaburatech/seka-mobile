@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 import Home from '../screens/HomeScreen';
 import Search from '../screens/SearchScreen';
-import Profile from '../screens/ProfileScreen';
+import Order from '../screens/OrderScreen';
 import Cart from '../screens/CartScreen';
 
 const Tab = createBottomTabNavigator();
@@ -23,8 +23,8 @@ const Routes = () => {
             iconName = 'ios-search';
           } else if (route.name === 'My Cart') {
             iconName = 'ios-cart';
-          } else if (route.name === 'Profile') {
-            iconName = 'ios-person';
+          } else if (route.name === 'My Order') {
+            iconName = 'md-reorder';
           }
           return <Ionicons name={iconName} size={size} color={color} />;
         },
@@ -38,7 +38,7 @@ const Routes = () => {
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Search" component={Search} />
       <Tab.Screen name="My Cart" component={Cart} />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="My Order" component={Order} />
     </Tab.Navigator>
   );
 };

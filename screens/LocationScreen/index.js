@@ -93,7 +93,7 @@ const LocationScreen = ({ savedLocations }) => {
             <SmallButton
               text="Place your order"
               accent
-              onPress={() => navigation.navigate('Verify Phone')}
+              onPress={() => navigation.navigate('Register Phone Number')}
             />
           </View>
         </View>
