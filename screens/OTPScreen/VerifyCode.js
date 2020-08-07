@@ -50,7 +50,7 @@ class VerifyCode extends Component {
               if (!isValid) {
                 alertText();
               } else {
-                this.props.navigation.navigate('Orders');
+                this.props.navigation.navigate('Payment');
               }
             }}
           />
