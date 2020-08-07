@@ -15,14 +15,7 @@ import SmallButton from '../../components/SmallButton';
 
 const TabView = ({ currentTab, handleCategoryChange }) => {
   return (
-    <ScrollView
-      horizontal={true}
-      style={
-        {
-          // marginBottom: 20,
-        }
-      }
-    >
+    <ScrollView horizontal={true}>
       <TouchableWithoutFeedback
         onPress={() => handleCategoryChange('Your Locations')}
       >

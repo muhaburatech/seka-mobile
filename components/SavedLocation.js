@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, CheckBox, StyleSheet, Dimensions } from 'react-native';
+import {
+  View,
+  Text,
+  CheckBox,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
 const SaveLocation = ({ location }) => {
@@ -23,6 +30,21 @@ const SaveLocation = ({ location }) => {
           onValueChange={setSelection}
           style={style.checkbox}
         />
+        <TouchableOpacity
+          style={{
+            marginTop: 14,
+          }}
+          onPress={(id = location.id) => {
+            console.log(id);
+          }}
+        >
+          <MaterialIcons
+            style={{ paddingRight: 5 }}
+            name="delete"
+            size={30}
+            color={'tomato'}
+          />
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -54,7 +76,8 @@ const style = StyleSheet.create({
     marginBottom: 5,
   },
   checkboxContainer: {
-    flexDirection: 'row',
+    flexDirection: 'column',
+    alignContent: 'space-between',
   },
   checkbox: {
     color: 'tomato',
