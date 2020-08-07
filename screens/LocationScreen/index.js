@@ -17,9 +17,11 @@ const TabView = ({ currentTab, handleCategoryChange }) => {
   return (
     <ScrollView
       horizontal={true}
-      style={{
-        marginBottom: 20,
-      }}
+      style={
+        {
+          // marginBottom: 20,
+        }
+      }
     >
       <TouchableWithoutFeedback
         onPress={() => handleCategoryChange('Your Locations')}
@@ -74,7 +76,7 @@ const LocationScreen = ({ savedLocations }) => {
         handleCategoryChange={_handleCategoryChange}
       />
       {currentTab === 'Your Locations' ? (
-        <View>
+        <ScrollView>
           {savedLocations.length === 0 ? (
             <Text>No saved locations</Text>
           ) : (
@@ -87,7 +89,7 @@ const LocationScreen = ({ savedLocations }) => {
               flexDirection: 'row',
               alignItems: 'stretch',
               justifyContent: 'space-around',
-              marginBottom: 30,
+              marginBottom: 60,
             }}
           >
             <SmallButton
@@ -96,19 +98,12 @@ const LocationScreen = ({ savedLocations }) => {
               onPress={() => navigation.navigate('Register Phone Number')}
             />
           </View>
-        </View>
+        </ScrollView>
       ) : (
         <ScrollView keyboardShouldPersistTaps="always">
           <GooglePlacesInput notifyChange={notifyChange} />
           {showFormatLocation && (
-            <FormatLocation
-              id={region.id}
-              location_name={region.main_text}
-              district={region.district}
-              street={region.street}
-              phone_number=""
-              house_number=""
-            />
+            <FormatLocation region={region} phone_number="" house_number="" />
           )}
         </ScrollView>
       )}

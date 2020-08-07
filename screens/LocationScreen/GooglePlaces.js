@@ -12,9 +12,9 @@ const GooglePlacesInput = ({ notifyChange }) => {
         const locationDetails = {
           id: details.place_id,
           main_text: data.structured_formatting.main_text,
-          secondary_text: data.structured_formatting.secondary_text,
-          street: details.address_components[0].short_name,
-          district: details.address_components[3].short_name,
+          secondary_text: data.structured_formatting.secondary_text || '',
+          street: details.address_components[0].short_name || '',
+          district: details.address_components[3].short_name || '',
         };
 
         return notifyChange(locationDetails);
