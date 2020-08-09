@@ -13,10 +13,7 @@ class VerifyCode extends Component {
   };
 
   alertText = () => {
-    const { otpInput = '' } = this.state;
-    if (otpInput) {
-      Alert.alert(otpInput);
-    }
+    Alert.alert('Invalid code entered');
   };
 
   clear = () => {
@@ -46,9 +43,9 @@ class VerifyCode extends Component {
             text="Verify"
             accent
             onPress={() => {
-              const isValid = this.props.storedCode == this.state.otpInput;
+              const isValid = this.props.storedCode.code == this.state.otpInput;
               if (!isValid) {
-                alertText();
+                this.alertText();
               } else {
                 this.props.navigation.navigate('Payment');
               }
