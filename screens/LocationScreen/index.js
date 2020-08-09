@@ -12,6 +12,10 @@ import Colors from '../../constants/Colors';
 import GooglePlacesInput from './GooglePlaces';
 import FormatLocation from './FormatLocation/index';
 import SmallButton from '../../components/SmallButton';
+import {
+  deleteLocation,
+  chosenLocation,
+} from '../../redux/actions/location/actions';
 
 const TabView = ({ currentTab, handleCategoryChange }) => {
   return (
@@ -48,14 +52,24 @@ const TabView = ({ currentTab, handleCategoryChange }) => {
   );
 };
 
-const LocationScreen = ({ savedLocations }) => {
+const LocationScreen = ({ savedLocations, dispatch }) => {
   const navigation = useNavigation();
   const [currentTab, setCurrentTab] = useState('Your Locations');
   const [region, setRegion] = useState(null);
+  const [selectedLocation, setSelectedLocation] = useState(null);
   const [showFormatLocation, setShowFormatLocation] = useState(false);
   const _handleCategoryChange = (activeTab) => {
     setCurrentTab(activeTab);
   };
+
+  function handleDeleteLocation(id) {
+    dispatch(deleteLocation(id));
+  }
+
+  function handleSelectedLocation(id) {
+    setSelectedLocation(id);
+    dispatch(chosenLocation(id));
+  }
 
   function notifyChange(loc) {
     setRegion(loc);
@@ -74,7 +88,15 @@ const LocationScreen = ({ savedLocations }) => {
             <Text>No saved locations</Text>
           ) : (
             savedLocations.map((location) => {
-              return <SavedLocation key={location.id} location={location} />;
+              return (
+                <SavedLocation
+                  selectedLocation={selectedLocation}
+                  setChosenLocation={handleSelectedLocation}
+                  key={location.id}
+                  handleDeleteLocation={handleDeleteLocation}
+                  location={location}
+                />
+              );
             })
           )}
           <View

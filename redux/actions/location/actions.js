@@ -1,5 +1,6 @@
 export const ADD_LOCATION = 'ADD_LOCATION';
-export const FETCH_LOCATION = 'FETCH_LOCATION';
+export const DELETE_LOCATION = 'DELETE_LOCATION';
+export const SET_CHOSEN_LOCATION = 'SET_CHOSEN_LOCATION';
 
 export function addLocation(locationData) {
   return {
@@ -8,8 +9,16 @@ export function addLocation(locationData) {
   };
 }
 
-export function retrieveLocation() {
+export function chosenLocation(id) {
   return {
-    type: FETCH_LOCATION,
+    type: SET_CHOSEN_LOCATION,
+    id,
+  };
+}
+
+export function deleteLocation(id) {
+  return {
+    type: DELETE_LOCATION,
+    id,
   };
 }

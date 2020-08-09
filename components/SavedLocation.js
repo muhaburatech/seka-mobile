@@ -1,16 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   View,
   Text,
-  CheckBox,
   StyleSheet,
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
+
+import { Checkbox } from 'react-native-paper';
 import { MaterialIcons } from '@expo/vector-icons';
 
-const SaveLocation = ({ location }) => {
-  const [isSelected, setSelection] = useState(false);
+const SaveLocation = ({
+  selectedLocation,
+  location,
+  handleDeleteLocation,
+  setChosenLocation,
+}) => {
   return (
     <View style={style.locationBox}>
       <MaterialIcons
@@ -25,17 +30,17 @@ const SaveLocation = ({ location }) => {
         <Text style={style.district}>{location.phone_number}</Text>
       </View>
       <View style={style.checkboxContainer}>
-        <CheckBox
-          value={isSelected}
-          onValueChange={setSelection}
+        <Checkbox
+          status={selectedLocation === location.id ? 'checked' : 'unchecked'}
+          onPress={() => setChosenLocation(location.id)}
           style={style.checkbox}
         />
         <TouchableOpacity
           style={{
             marginTop: 14,
           }}
-          onPress={(id = location.id) => {
-            console.log(id);
+          onPress={() => {
+            handleDeleteLocation(location.id);
           }}
         >
           <MaterialIcons
@@ -52,6 +57,7 @@ const SaveLocation = ({ location }) => {
 
 const style = StyleSheet.create({
   locationBox: {
+    marginTop: 15,
     flexDirection: 'row',
     backgroundColor: '#DCDCDC',
     borderRadius: 10,

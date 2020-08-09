@@ -1,4 +1,4 @@
-const tintColor = '#ff6347';
+const tintColor = '#2BDA8E';
 const authBorderColor = 'rgba(255, 255, 255, 0.5)';
 
 export default {
