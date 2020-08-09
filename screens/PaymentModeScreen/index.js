@@ -30,7 +30,7 @@ const PaymentOptionsScreen = () => {
             marginTop: 2,
           }}
         >
-          <FontAwesome5 name="hand-holding-usd" size={30} color="tomato" />
+          <FontAwesome5 name="hand-holding-usd" size={30} color="#2BDA8E" />
         </View>
         <Text
           flex-5

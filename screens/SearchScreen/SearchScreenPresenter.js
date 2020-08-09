@@ -33,7 +33,7 @@ const Input = styled.TextInput`
   border-radius: 18px;
   margin-top: 15;
   margin-bottom: 15;
-  border: 1px solid tomato;
+  border: 1px solid #2bda8e;
   padding-horizontal: 15px;
   width: ${Platform.OS === 'ios' ? '90%' : '91%'};
   margin-right: 10px;

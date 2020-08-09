@@ -119,11 +119,11 @@ const style = StyleSheet.create({
     marginBottom: 30,
   },
   tabActive: {
-    borderBottomColor: 'tomato',
+    borderBottomColor: '#2BDA8E',
     borderBottomWidth: 3,
   },
   tabLinkActive: {
-    color: 'tomato',
+    color: '#2BDA8E',
   },
 });
 

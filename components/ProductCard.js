@@ -24,6 +24,7 @@ const Name = styled.Text`
   color: ${Colors.greyColor};
   margin-left: 10px;
   margin-bottom: 10px;
+  max-width: 120px;
 `;
 
 const Price = styled.Text`

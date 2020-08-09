@@ -3,7 +3,15 @@ import { ScrollView } from 'react-native';
 import { Card, View, Text } from 'react-native-ui-lib';
 import OrderStatus from '../../components/orderStatus';
 
-const OrderPresenter = () => {
+const OrderPresenter = ({ cartItems, location }) => {
+  const deliveryCharges = 1200;
+  let totalPrice = 0;
+  for (let item of cartItems) {
+    totalPrice += item.price;
+  }
+
+  let totalPriceIncludingDelivery = deliveryCharges + totalPrice;
+
   return (
     <ScrollView>
       <Card
@@ -25,14 +33,12 @@ const OrderPresenter = () => {
               fontWeight: 'bold',
               marginTop: 1,
               textAlign: 'center',
-              color: 'tomato',
+              color: '#2BDA8E',
               marginBottom: 15,
             }}
           >
             Order Tracking
           </Text>
-          <OrderStatus />
-          <OrderStatus />
           <OrderStatus />
         </View>
       </Card>
@@ -57,13 +63,20 @@ const OrderPresenter = () => {
               fontWeight: 'bold',
               marginTop: 1,
               marginBottom: 10,
-              color: 'tomato',
+              color: '#2BDA8E',
             }}
           >
             Your Order Details
           </Text>
-          <Row col1="1x Baby Pampers" col2="RWF 14,000" />
-
+          {cartItems.map((item) => {
+            return (
+              <Row
+                id={item.id}
+                col1={`${item.numberOfItems}x ${item.title}`}
+                col2={`RWF ${item.price}`}
+              />
+            );
+          })}
           <Text
             style={{
               fontSize: 19,
@@ -71,21 +84,24 @@ const OrderPresenter = () => {
               fontWeight: 'bold',
               marginTop: 1,
               marginBottom: 10,
-              color: 'tomato',
+              color: '#2BDA8E',
             }}
           >
             Total
           </Text>
-
-          <Row col1="Sub Total product amount" col2="RWF 14,000" />
+          <Row col1="Sub Total product amount" col2={`RWF ${totalPrice}`} />
           <Row col1="Delivery charges" col2="RWF 1,200" />
           <Row col1="Tax" col2="RWF 0" />
           <Row col1="Container Charge" col2="RWF 0" />
-          <Row col1="Total amount" col2="RWF 7000" isBold />
+          <Row
+            col1="Total amount"
+            col2={`RWF ${totalPriceIncludingDelivery}`}
+            isBold
+          />
         </View>
       </Card>
       <Card
-        row // control the children flow direction
+        row
         borderRadius={12}
         containerStyle={{ margin: 20 }}
         enableShadow={true}
@@ -105,13 +121,13 @@ const OrderPresenter = () => {
               fontWeight: 'bold',
               marginTop: 1,
               marginBottom: 10,
-              color: 'tomato',
+              color: '#2BDA8E',
             }}
           >
             Delivery Location
           </Text>
-          <Row col1="Street Name" col2="Rubangura House" />
-          <Row col1="Area Name" col2="Nyarugenge" />
+          <Row col1="Street Name" col2={`${location.location_name}`} />
+          <Row col1="Area Name" col2={`${location.district}`} />
           <Row col1="Contact Phone" col2="250785141480" />
           <Row col1="House Number" col2="None" />
         </View>

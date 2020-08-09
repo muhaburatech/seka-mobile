@@ -5,20 +5,20 @@ import CategoryHeaderPresenter from './CategoryHeaderPresenter';
 const CategoryHeaderContainer = ({
   currentTab,
   handleCategoryChange,
-  categories,
+  catgries,
 }) => {
   return (
     <CategoryHeaderPresenter
       currentTab={currentTab}
       handleCategoryChange={handleCategoryChange}
-      categories={categories}
+      categories={catgries}
     />
   );
 };
 
-function mapStateToProps({ categories: { categories } }) {
+function mapStateToProps({ categories }) {
   return {
-    categories,
+    catgries: categories.categories,
   };
 }
 

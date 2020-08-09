@@ -1,7 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import ProductCard from './ProductCard';
-import { Text, View, ScrollView, StyleSheet } from 'react-native';
+
+const Column = styled.View`
+  margin: 4px;
+`;
+
+const ScrollView = styled.ScrollView``;
+
+const MasonryContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`;
 
 const splitArray = (arr) => {
   const { length } = arr;
@@ -11,30 +22,29 @@ const splitArray = (arr) => {
   return { firstHalf, secondHalf };
 };
 
-const MasonryProducts = ({ products, heading }) => {
-  return (
-    <View>
-      <Text style={style.heading}>{heading}</Text>
-      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-        {products.map((product) => {
-          return (
-            <View style={{ margin: 20 }} key={product.Title}>
-              <ProductCard product={product} />
-            </View>
-          );
-        })}
-      </ScrollView>
-    </View>
-  );
-};
-const style = StyleSheet.create({
-  heading: {
-    marginLeft: 12,
-    fontSize: 17,
-    padding: 10,
-    fontWeight: 'bold',
-  },
-});
+const MasonryProducts = ({ products, children = null }) => (
+  <ScrollView
+    contentContainerStyle={{
+      paddingHorizontal: 20,
+      paddingVertical: 15,
+    }}
+  >
+    {children}
+    <MasonryContainer>
+      <Column>
+        {splitArray(products).secondHalf.map((product) => (
+          <ProductCard product={product} />
+        ))}
+      </Column>
+      <Column>
+        {splitArray(products).firstHalf.map((product) => (
+          <ProductCard product={product} />
+        ))}
+      </Column>
+    </MasonryContainer>
+  </ScrollView>
+);
+
 MasonryProducts.propTypes = {
   products: PropTypes.instanceOf(Array),
   children: PropTypes.oneOfType([
