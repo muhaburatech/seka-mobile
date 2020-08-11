@@ -9,7 +9,7 @@ import rootReducer from './reducers/';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['cart', 'location', 'otp'],
+  whitelist: ['cart', 'location', 'otp', 'order'],
   blacklist: ['products', 'categories'],
 };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native-ui-lib';
 import { FontAwesome } from '@expo/vector-icons';
 
-const OrderStatus = () => {
+const OrderStatus = ({ lastupdated, status }) => {
   return (
     <View
       row
@@ -22,7 +22,7 @@ const OrderStatus = () => {
             fontSize: 17,
           }}
         >
-          2020-07-24 13:41:35
+          {lastupdated}
         </Text>
         <Text
           style={{
@@ -30,7 +30,7 @@ const OrderStatus = () => {
             fontSize: 17,
           }}
         >
-          Review
+          {status}
         </Text>
       </View>
     </View>

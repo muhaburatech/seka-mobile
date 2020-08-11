@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Platform } from 'react-native';
 import styled from 'styled-components';
 import Colors from '../constants/Colors';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Container = styled.View`
   flex-direction: row;
@@ -37,25 +38,31 @@ const LinkDescription = styled.Text`
 
 const ICON_SIZE = Platform.OS === 'ios' ? 26 : 20;
 
-const ProfileLink = ({ iconName, name, description }) => (
-  <Container>
-    <Column>
+const ProfileLink = ({ iconName, name, description, handlePress }) => (
+  <TouchableOpacity onPress={handlePress}>
+    <Container>
+      <Column>
+        <IconContainer>
+          <Ionicons name={iconName} size={ICON_SIZE} color={Colors.greyColor} />
+        </IconContainer>
+        <View>
+          <LinkName>{name}</LinkName>
+          <LinkDescription>{description}</LinkDescription>
+        </View>
+      </Column>
       <IconContainer>
-        <Ionicons name={iconName} size={ICON_SIZE} color={Colors.greyColor} />
+        <TouchableOpacity onPress={handlePress}>
+          <Ionicons
+            name={
+              Platform.OS === 'ios' ? 'ios-arrow-forward' : 'md-arrow-forward'
+            }
+            size={ICON_SIZE}
+            color={Colors.greyColor}
+          />
+        </TouchableOpacity>
       </IconContainer>
-      <View>
-        <LinkName>{name}</LinkName>
-        <LinkDescription>{description}</LinkDescription>
-      </View>
-    </Column>
-    <IconContainer>
-      <Ionicons
-        name={Platform.OS === 'ios' ? 'ios-arrow-forward' : 'md-arrow-forward'}
-        size={ICON_SIZE}
-        color={Colors.greyColor}
-      />
-    </IconContainer>
-  </Container>
+    </Container>
+  </TouchableOpacity>
 );
 
 ProfileLink.propTypes = {

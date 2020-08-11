@@ -23,7 +23,6 @@ export default function cart(state = [], action) {
           location.chosen = false;
         }
       }
-      console.log(copySavedLocation);
       return copySavedLocation;
     default:
       return state;

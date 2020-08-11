@@ -1,9 +1,11 @@
-import React from "react";
-import { Platform } from "react-native";
-import styled from "styled-components";
-import Avatar from "../../components/Avatar";
-import Colors from "../../constants/Colors";
-import ProfileLink from "../../components/ProfileLink";
+import React from 'react';
+import { Platform } from 'react-native';
+import styled from 'styled-components';
+import { useNavigation } from '@react-navigation/native';
+
+import Avatar from '../../components/Avatar';
+import Colors from '../../constants/Colors';
+import ProfileLink from '../../components/ProfileLink';
 
 const Container = styled.View`
   background-color: white;
@@ -69,66 +71,74 @@ const DataPointName = styled.Text`
 
 const LinksList = styled.ScrollView``;
 
-const ProfileScreenPresenter = () => (
-  <Container>
-    <ProfileHeader>
-      <AvatarContainer>
-        <Avatar
-          size="lg"
-          source={require("../../assets/images/lgAvatar.png")}
+const ProfileScreenPresenter = () => {
+  const navigation = useNavigation();
+
+  return (
+    <Container>
+      {/* <ProfileHeader>
+        <DataContainer>
+          <DataPointContainer>
+            <DataPointNumber>425</DataPointNumber>
+            <DataPointName>Trades</DataPointName>
+          </DataPointContainer>
+          <DataPointContainer>
+            <DataPointNumber>4.5</DataPointNumber>
+            <DataPointName>Avg. Rating</DataPointName>
+          </DataPointContainer>
+          <DataPointContainer>
+            <DataPointNumber>20m</DataPointNumber>
+            <DataPointName>Resp. Time</DataPointName>
+          </DataPointContainer>
+        </DataContainer>
+      </ProfileHeader> */}
+      <LinksList
+        contentContainerStyle={{
+          paddingTop: 10,
+          paddingHorizontal: 20,
+        }}
+      >
+        <ProfileLink
+          name="My Orders"
+          description="Check your order history"
+          handlePress={() => {
+            return navigation.navigate('Order List');
+          }}
+          iconName={
+            Platform.OS === 'ios' ? 'ios-trending-up' : 'md-trending-up'
+          }
         />
-      </AvatarContainer>
-      <Name>Ralph Ray</Name>
-      <Bio>Flip Expert</Bio>
-      <Divider />
-      <DataContainer>
-        <DataPointContainer>
-          <DataPointNumber>425</DataPointNumber>
-          <DataPointName>Trades</DataPointName>
-        </DataPointContainer>
-        <DataPointContainer>
-          <DataPointNumber>4.5</DataPointNumber>
-          <DataPointName>Avg. Rating</DataPointName>
-        </DataPointContainer>
-        <DataPointContainer>
-          <DataPointNumber>20m</DataPointNumber>
-          <DataPointName>Resp. Time</DataPointName>
-        </DataPointContainer>
-      </DataContainer>
-    </ProfileHeader>
-    <LinksList
-      contentContainerStyle={{
-        paddingTop: 10,
-        paddingHorizontal: 20
-      }}
-    >
-      <ProfileLink
-        name="My Trades"
-        description="Check your trading history"
-        iconName={Platform.OS === "ios" ? "ios-trending-up" : "md-trending-up"}
-      />
-      <ProfileLink
-        name="Help Center"
-        description="Help regarding your recent trades"
-        iconName={Platform.OS === "ios" ? "ios-trending-up" : "md-trending-up"}
-      />
-      <ProfileLink
-        name="Favorites"
-        description="Your collection"
-        iconName={Platform.OS === "ios" ? "ios-trending-up" : "md-trending-up"}
-      />
-      <ProfileLink
-        name="My Profile"
-        description="Check your trading history"
-        iconName={Platform.OS === "ios" ? "ios-trending-up" : "md-trending-up"}
-      />
-      <ProfileLink
-        name="Settings"
-        description="Profile and security information"
-        iconName={Platform.OS === "ios" ? "ios-trending-up" : "md-trending-up"}
-      />
-    </LinksList>
-  </Container>
-);
+        {/* <ProfileLink
+          name="Help Center"
+          description="Help regarding your recent trades"
+          iconName={
+            Platform.OS === 'ios' ? 'ios-trending-up' : 'md-trending-up'
+          }
+        />
+        <ProfileLink
+          name="Favorites"
+          description="Your collection"
+          iconName={
+            Platform.OS === 'ios' ? 'ios-trending-up' : 'md-trending-up'
+          }
+        />
+        <ProfileLink
+          name="My Profile"
+          description="Check your trading history"
+          iconName={
+            Platform.OS === 'ios' ? 'ios-trending-up' : 'md-trending-up'
+          }
+        />
+        <ProfileLink
+          name="Settings"
+          description="Profile and security information"
+          iconName={
+            Platform.OS === 'ios' ? 'ios-trending-up' : 'md-trending-up'
+          }
+        /> */}
+      </LinksList>
+    </Container>
+  );
+};
 
 export default ProfileScreenPresenter;

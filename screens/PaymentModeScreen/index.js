@@ -2,16 +2,29 @@ import React from 'react';
 import { Card, View, Text } from 'react-native-ui-lib';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { connect } from 'react-redux';
 
-const PaymentOptionsScreen = () => {
+import { registerOrder, fetchOrders } from '../../redux/actions/order/order';
+
+import idGeneretor from '../../utils/uniqueIDgenerator';
+const PaymentOptionsScreen = ({
+  phone,
+  cartItems,
+  choosenLocation,
+  registerOrder: register_order,
+  getAllOrders,
+}) => {
   const navigation = useNavigation();
 
   return (
     <Card
-      row // control the children flow direction
+      row
       borderRadius={12}
       onPress={() => {
-        return navigation.navigate('My Order');
+        const orderId = idGeneretor();
+        register_order({ orderId, cartItems, choosenLocation, phone });
+        getAllOrders(phone);
+        return navigation.navigate('Order List');
       }}
       containerStyle={{ margin: 20 }}
       enableShadow={true}
@@ -47,4 +60,15 @@ const PaymentOptionsScreen = () => {
   );
 };
 
-export default PaymentOptionsScreen;
+const mapStateToProps = ({ cart, location, otp }) => {
+  return {
+    cartItems: cart,
+    choosenLocation: location.filter((loc) => loc.chosen === true)[0],
+    phone: otp.user.phoneNumber,
+  };
+};
+
+export default connect(mapStateToProps, {
+  registerOrder,
+  getAllOrders: fetchOrders,
+})(PaymentOptionsScreen);

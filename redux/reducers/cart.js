@@ -10,7 +10,7 @@ export default function cart(state = [], { type, cartItem }) {
           numberOfItems: cartItem.count,
           image: cartItem.image,
           title: cartItem.title,
-          price: cartItem.price,
+          price: cartItem.price * cartItem.count,
         },
       ];
     case FLUSH_CART_INFO:

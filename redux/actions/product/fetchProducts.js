@@ -23,6 +23,7 @@ function fetchProducts() {
         return res;
       })
       .catch((error) => {
+        console.log(error);
         dispatch(fetchProductsError(error));
       });
   };
