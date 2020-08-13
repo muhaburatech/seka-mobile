@@ -44,7 +44,6 @@ class App extends React.Component {
       require('./assets/images/smAvatar2.png'),
     ]);
     const res = await fetchProducts();
-    console.log('res :>> ', res);
     await fetchCategories();
     this.setState({ appIsReady: true }, async () => {
       await SplashScreen.hideAsync();

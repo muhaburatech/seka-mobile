@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "fira",
+    "name": "seka",
     "description": "eCommerce App React Native Codekit",
-    "slug": "fira",
+    "slug": "seka",
     "privacy": "public",
     "primaryColor": "#007BFF",
     "platforms": [
@@ -25,7 +25,6 @@
     ],
     "ios": {
       "supportsTablet": true
-    },
-    "githubUrl": "https://github.com/serranoarevalo/fira"
+    }
   }
 }

@@ -32,6 +32,7 @@ const SaveLocation = ({
       <View style={style.checkboxContainer}>
         <Checkbox
           status={selectedLocation === location.id ? 'checked' : 'unchecked'}
+          uncheckedColor="blue"
           onPress={() => setChosenLocation(location.id)}
           style={style.checkbox}
         />
@@ -87,6 +88,7 @@ const style = StyleSheet.create({
   },
   checkbox: {
     color: '#2BDA8E',
+    borderColor: '#2BDA8E',
   },
 });
 

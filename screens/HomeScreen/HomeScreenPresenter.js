@@ -68,6 +68,7 @@ const HomeScreenPresenter = ({
 
 const styles = StyleSheet.create({
   header: {
+    paddingTop: 15,
     paddingHorizontal: theme.sizes.base * 2,
   },
 });

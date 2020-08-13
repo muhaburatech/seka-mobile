@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { connect } from 'react-redux';
 
 import { registerOrder, fetchOrders } from '../../redux/actions/order/order';
+import { clearCartInfo } from '../../redux/actions/cart/actions';
 
 import idGeneretor from '../../utils/uniqueIDgenerator';
 const PaymentOptionsScreen = ({
@@ -13,8 +14,19 @@ const PaymentOptionsScreen = ({
   choosenLocation,
   registerOrder: register_order,
   getAllOrders,
+  deleteAllItemsInCart,
 }) => {
   const navigation = useNavigation();
+
+  if (0) {
+    return (
+      <Modal
+        isVisible={modalVisible}
+        handleCloseModel={handlePressOk}
+        content="Product successfully added to cart"
+      />
+    );
+  }
 
   return (
     <Card
@@ -24,7 +36,9 @@ const PaymentOptionsScreen = ({
         const orderId = idGeneretor();
         register_order({ orderId, cartItems, choosenLocation, phone });
         getAllOrders(phone);
-        return navigation.navigate('Order List');
+        console.log(phone);
+        deleteAllItemsInCart();
+        // return navigation.navigate('Order List');
       }}
       containerStyle={{ margin: 20 }}
       enableShadow={true}
@@ -71,4 +85,5 @@ const mapStateToProps = ({ cart, location, otp }) => {
 export default connect(mapStateToProps, {
   registerOrder,
   getAllOrders: fetchOrders,
+  deleteAllItemsInCart: clearCartInfo,
 })(PaymentOptionsScreen);

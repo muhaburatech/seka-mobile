@@ -19,7 +19,13 @@ const Navigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={MainTabNavigator} />
+        <Stack.Screen
+          name="Home"
+          component={MainTabNavigator}
+          options={{
+            headerTitle: 'SEKA',
+          }}
+        />
         <Stack.Screen name="My Order" component={Order} />
         <Stack.Screen name="Product" component={ProductScreen} />
         <Stack.Screen name="Location" component={LocationScreen} />

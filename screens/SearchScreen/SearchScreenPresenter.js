@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ProductCard from '../../components/ProductCard';
-import { View } from 'react-native';
+import Colors from '../../constants/Colors';
 
 const Container = styled.View`
   flex-direction: column;

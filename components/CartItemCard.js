@@ -1,7 +1,8 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
 import AutoHeightImage from 'react-native-auto-height-image';
+import { MaterialIcons } from '@expo/vector-icons';
 
 import Layout from '../constants/Layout';
 import Colors from '../constants/Colors';
@@ -34,7 +35,7 @@ const Price = styled.Text`
   color: ${Colors.blackColor};
 `;
 
-const CartItemCard = ({ cartItem }) => {
+const CartItemCard = ({ cartItem, handleDeleteCartItem }) => {
   return (
     <Container>
       <ImageContainer>
@@ -60,6 +61,24 @@ const CartItemCard = ({ cartItem }) => {
         <Price>{`${cartItem.numberOfItems}x Items`}</Price>
         <Price>{`RWF ${cartItem.price}`}</Price>
       </View>
+      {/* <TouchableOpacity
+        style={{
+          flex: 1,
+          alignItems: 'flex-end',
+          justifyContent: 'flex-start',
+          marginTop: 5,
+        }}
+        onPress={() => {
+          handleDeleteCartItem(location.id);
+        }}
+      >
+        <MaterialIcons
+          style={{ paddingRight: 5 }}
+          name="delete"
+          size={30}
+          color={'#2BDA8E'}
+        />
+      </TouchableOpacity> */}
     </Container>
   );
 };

@@ -52,7 +52,7 @@ const TabView = ({ currentTab, handleCategoryChange }) => {
   );
 };
 
-const LocationScreen = ({ savedLocations, dispatch }) => {
+const LocationScreen = ({ savedLocations, dispatch, user }) => {
   const navigation = useNavigation();
   const [currentTab, setCurrentTab] = useState('Your Locations');
   const [region, setRegion] = useState(null);
@@ -76,6 +76,8 @@ const LocationScreen = ({ savedLocations, dispatch }) => {
     if (loc) setShowFormatLocation(true);
   }
 
+  console.log('savedLocations.lenght :>> ', savedLocations.lenght);
+
   return (
     <View style={style.container}>
       <TabView
@@ -85,7 +87,14 @@ const LocationScreen = ({ savedLocations, dispatch }) => {
       {currentTab === 'Your Locations' ? (
         <ScrollView>
           {savedLocations.length === 0 ? (
-            <Text>No saved locations</Text>
+            <Text
+              style={{
+                marginTop: 20,
+                marginLeft: 10,
+              }}
+            >
+              No saved locations
+            </Text>
           ) : (
             savedLocations.map((location) => {
               return (
@@ -99,20 +108,27 @@ const LocationScreen = ({ savedLocations, dispatch }) => {
               );
             })
           )}
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'stretch',
-              justifyContent: 'space-around',
-              marginBottom: 60,
-            }}
-          >
-            <SmallButton
-              text="Place your order"
-              accent
-              onPress={() => navigation.navigate('Register Phone Number')}
-            />
-          </View>
+          {savedLocations.length === 0 ? null : (
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'stretch',
+                justifyContent: 'space-around',
+                marginBottom: 60,
+              }}
+            >
+              <SmallButton
+                text="Place your order"
+                accent
+                onPress={() => {
+                  if (user) {
+                    return navigation.navigate('Payment');
+                  }
+                  return navigation.navigate('Register Phone Number');
+                }}
+              />
+            </View>
+          )}
         </ScrollView>
       ) : (
         <ScrollView keyboardShouldPersistTaps="always">
@@ -149,9 +165,10 @@ const style = StyleSheet.create({
   },
 });
 
-const mapStateToProps = ({ location }) => {
+const mapStateToProps = ({ location, otp }) => {
   return {
     savedLocations: location,
+    user: otp.user,
   };
 };
 

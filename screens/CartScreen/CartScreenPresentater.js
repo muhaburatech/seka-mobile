@@ -14,6 +14,11 @@ const Container = styled.View`
 `;
 
 const CartPresenter = ({ cartItems }) => {
+  console.log('cartItems :>> ', cartItems);
+  let totalPrice = 0;
+  for (let item of cartItems) {
+    totalPrice += item.price;
+  }
   const navigation = useNavigation();
   if (cartItems.length === 0) {
     return (
@@ -27,6 +32,32 @@ const CartPresenter = ({ cartItems }) => {
       {cartItems.map((cartItem) => {
         return <CartItemCard key={cartItem.id} cartItem={cartItem} />;
       })}
+      <View
+        style={{
+          margin: 40,
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          paddingHorizontal: 50,
+          flexDirection: 'row',
+        }}
+      >
+        <Text
+          style={{
+            fontWeight: 'bold',
+            fontSize: 20,
+          }}
+        >
+          Total Price:
+        </Text>
+        <Text
+          style={{
+            fontSize: 20,
+          }}
+        >
+          RWF {totalPrice}
+        </Text>
+      </View>
       <View
         style={{
           flexDirection: 'row',

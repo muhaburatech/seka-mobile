@@ -5,7 +5,7 @@ import { Card, View, Text } from 'react-native-ui-lib';
 import { ScrollView } from 'react-native-gesture-handler';
 import { fetchOrders } from '../../redux/actions/order/order';
 
-const OrderList = ({ orders }) => {
+const OrderList = ({ orders = [] }) => {
   const navigation = useNavigation();
 
   return (
