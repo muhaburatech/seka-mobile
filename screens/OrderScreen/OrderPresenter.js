@@ -160,10 +160,10 @@ function DeliveryLocationDetails({ location, phone }) {
         >
           Delivery Location
         </Text>
-        <Row col1="Street Name" col2={`${location.location_name}`} />
-        <Row col1="Area Name" col2={`${location.district}`} />
-        <Row col1="Contact Phone" col2={`${phone}`} />
-        <Row col1="House Number" col2="None" />
+        <Row col1="Street Name: " col2={`${location.location_name}`} />
+        <Row col1="Area Name: " col2={`${location.district}`} />
+        <Row col1="Contact Phone: " col2={`${phone}`} />
+        <Row col1="House Number: " col2="None" />
       </View>
     </Card>
   );

@@ -16,12 +16,6 @@ const LinksList = styled.ScrollView``;
 const ProfileScreenPresenter = () => {
   const navigation = useNavigation();
 
-  function openWhatsapp(phone, text) {
-    return Linking.openURL(
-      `http://api.whatsapp.com/send?phone=250${phone}&text=${text}`
-    );
-  }
-
   return (
     <Container>
       <LinksList
@@ -41,20 +35,6 @@ const ProfileScreenPresenter = () => {
           }
         />
       </LinksList>
-      <TouchableHighlight
-        style={{
-          position: 'absolute',
-          bottom: 50,
-          right: 25,
-        }}
-      >
-        <Ionicons
-          onPress={() => openWhatsapp('788425971', 'Seka app')}
-          name="logo-whatsapp"
-          size={60}
-          color="darkgreen"
-        />
-      </TouchableHighlight>
     </Container>
   );
 };
