@@ -6,6 +6,7 @@ import Layout from '../../constants/Layout';
 import Colors from '../../constants/Colors';
 import UserPartials from '../../components/UserPartials';
 import Modal from '../../components/Modal';
+import formatNumber from '../../utils/formatNumber';
 
 const getHeight = () =>
   Layout.window.height <= 667
@@ -92,7 +93,9 @@ const ProductScreenPresenter = ({
         <DataContainer>
           <NamePrice>
             <NamePriceText>{productDetails.Title}</NamePriceText>
-            <NamePriceText>{`RWF ${productDetails.Price}`}</NamePriceText>
+            <NamePriceText>{`RWF ${formatNumber(
+              productDetails.Price
+            )}`}</NamePriceText>
           </NamePrice>
           <Divider />
           <Description>{productDetails.Description}</Description>

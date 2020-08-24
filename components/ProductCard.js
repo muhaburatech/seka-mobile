@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Layout from '../constants/Layout';
 import Colors from '../constants/Colors';
+import formatNumber from '../utils/formatNumber';
 
 const Container = styled.View`
   padding-bottom: 15;
@@ -50,7 +51,7 @@ const ProductCard = ({ product }) => {
           />
         </ImageContainer>
         <Name>{product.Title}</Name>
-        <Price>{`RWF ${product.Price}`}</Price>
+        <Price>{`RWF ${formatNumber(product.Price)}`}</Price>
       </Container>
     </TouchableWithoutFeedback>
   );

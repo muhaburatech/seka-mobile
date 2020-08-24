@@ -2,10 +2,10 @@ import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
 import AutoHeightImage from 'react-native-auto-height-image';
-import { MaterialIcons } from '@expo/vector-icons';
 
 import Layout from '../constants/Layout';
 import Colors from '../constants/Colors';
+import formatNumber from '../utils/formatNumber';
 
 const Container = styled.View`
   display: flex;
@@ -59,7 +59,7 @@ const CartItemCard = ({ cartItem, handleDeleteCartItem }) => {
       >
         <Name>{cartItem.title}</Name>
         <Price>{`${cartItem.numberOfItems}x Items`}</Price>
-        <Price>{`RWF ${cartItem.price}`}</Price>
+        <Price>{`RWF ${formatNumber(cartItem.price)}`}</Price>
       </View>
       {/* <TouchableOpacity
         style={{

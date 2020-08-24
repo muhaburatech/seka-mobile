@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import styled from 'styled-components';
 import CartItemCard from '../../components/CartItemCard';
 import SmallButton from '../../components/SmallButton';
+import formatNumber from '../../utils/formatNumber';
 
 const Container = styled.View`
   flex: 1;
@@ -55,7 +56,7 @@ const CartPresenter = ({ cartItems }) => {
             fontSize: 20,
           }}
         >
-          RWF {totalPrice}
+          RWF {formatNumber(totalPrice)}
         </Text>
       </View>
       <View

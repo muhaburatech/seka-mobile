@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import {
   ScrollView,
@@ -76,8 +76,6 @@ const LocationScreen = ({ savedLocations, dispatch, user }) => {
     if (loc) setShowFormatLocation(true);
   }
 
-  console.log('savedLocations.lenght :>> ', savedLocations.lenght);
-
   return (
     <View style={style.container}>
       <TabView
@@ -121,6 +119,9 @@ const LocationScreen = ({ savedLocations, dispatch, user }) => {
                 text="Place your order"
                 accent
                 onPress={() => {
+                  if (!selectedLocation) {
+                    return Alert.alert('Please choose a shipping address');
+                  }
                   if (user) {
                     return navigation.navigate('Payment');
                   }

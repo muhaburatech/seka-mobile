@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import { connect } from 'react-redux';
@@ -64,7 +64,7 @@ const PhoneInputScreen = ({ dispatch }) => {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 15,
+        padding: 5,
       }}
     >
       <View
@@ -91,7 +91,15 @@ const PhoneInputScreen = ({ dispatch }) => {
         <SmallButton
           accent
           text={`Send verification code`}
-          onPress={() => onSend(phonePlusCode, otp)}
+          onPress={() => {
+            if (!text) {
+              return Alert.alert('Please enter your name');
+            }
+            if (!phoneNumber) {
+              return Alert.alert('Please enter your phone number');
+            }
+            onSend(phonePlusCode, otp);
+          }}
         />
       </View>
     </View>

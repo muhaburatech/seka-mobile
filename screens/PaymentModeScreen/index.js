@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, View, Text } from 'react-native-ui-lib';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 
 import { registerOrder, fetchOrders } from '../../redux/actions/order/order';
 import { clearCartInfo } from '../../redux/actions/cart/actions';
+import Modal from '../../components/Modal';
 
 import idGeneretor from '../../utils/uniqueIDgenerator';
 const PaymentOptionsScreen = ({
@@ -16,14 +17,17 @@ const PaymentOptionsScreen = ({
   getAllOrders,
   deleteAllItemsInCart,
 }) => {
+  const [showModal, setShowModal] = useState(false);
   const navigation = useNavigation();
 
-  if (0) {
+  if (showModal) {
     return (
       <Modal
-        isVisible={modalVisible}
-        handleCloseModel={handlePressOk}
-        content="Product successfully added to cart"
+        isVisible={true}
+        handleCloseModel={() => {
+          return navigation.navigate('My Profile');
+        }}
+        content="Order successfully placed"
       />
     );
   }
@@ -36,9 +40,8 @@ const PaymentOptionsScreen = ({
         const orderId = idGeneretor();
         register_order({ orderId, cartItems, choosenLocation, phone });
         getAllOrders(phone);
-        console.log(phone);
         deleteAllItemsInCart();
-        // return navigation.navigate('Order List');
+        setShowModal(true);
       }}
       containerStyle={{ margin: 20 }}
       enableShadow={true}
@@ -84,6 +87,6 @@ const mapStateToProps = ({ cart, location, otp }) => {
 
 export default connect(mapStateToProps, {
   registerOrder,
-  getAllOrders: fetchOrders,
   deleteAllItemsInCart: clearCartInfo,
+  getAllOrders: fetchOrders,
 })(PaymentOptionsScreen);

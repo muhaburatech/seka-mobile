@@ -54,9 +54,10 @@ export function registerOrder(data) {
     let products = [];
     for (let product of data.cartItems) {
       products.push(
-        `${product.numberOfItems}x ${product.title} - ${product.price}`
+        `${product.numberOfItems}x ${product.title} - ${product.price} `
       );
     }
+
     dispatch(addOrderPending());
     const res = await axios
       .post(`${backendUrl}/orders`, {
