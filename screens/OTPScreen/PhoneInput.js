@@ -76,8 +76,8 @@ const PhoneInputScreen = ({ dispatch }) => {
       >
         <TextInput
           label="Enter your name"
-          theme={{ colors: { primary: '#2BDA8E' } }}
-          underlineColor={'#2BDA8E'}
+          theme={{ colors: { primary: '#ffbd59' } }}
+          underlineColor={'#ffbd59'}
           value={text}
           onChangeText={(text) => setText(text)}
         />

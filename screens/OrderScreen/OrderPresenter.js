@@ -57,7 +57,7 @@ function OrderTracking({ status, lastupdated }) {
             fontWeight: 'bold',
             marginTop: 1,
             textAlign: 'center',
-            color: '#2BDA8E',
+            color: '#ffbd59',
             marginBottom: 15,
           }}
         >
@@ -92,7 +92,7 @@ function OrderDetails({ products, totalPrice, totalPriceIncludingDelivery }) {
             fontWeight: 'bold',
             marginTop: 1,
             marginBottom: 10,
-            color: '#2BDA8E',
+            color: '#ffbd59',
           }}
         >
           Your Order Details
@@ -113,7 +113,7 @@ function OrderDetails({ products, totalPrice, totalPriceIncludingDelivery }) {
             fontWeight: 'bold',
             marginTop: 1,
             marginBottom: 10,
-            color: '#2BDA8E',
+            color: '#ffbd59',
           }}
         >
           Total
@@ -155,7 +155,7 @@ function DeliveryLocationDetails({ location, phone }) {
             fontWeight: 'bold',
             marginTop: 1,
             marginBottom: 10,
-            color: '#2BDA8E',
+            color: '#ffbd59',
           }}
         >
           Delivery Location

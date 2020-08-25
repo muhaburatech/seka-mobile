@@ -22,7 +22,7 @@ const SaveLocation = ({
         style={{ paddingRight: 5 }}
         name="location-on"
         size={40}
-        color={'#2BDA8E'}
+        color={'#ffbd59'}
       />
       <View>
         <Text style={style.nameOfLocation}>{location.location_name}</Text>
@@ -48,7 +48,7 @@ const SaveLocation = ({
             style={{ paddingRight: 5 }}
             name="delete"
             size={30}
-            color={'#2BDA8E'}
+            color={'#ffbd59'}
           />
         </TouchableOpacity>
       </View>
@@ -87,8 +87,8 @@ const style = StyleSheet.create({
     alignContent: 'space-between',
   },
   checkbox: {
-    color: '#2BDA8E',
-    borderColor: '#2BDA8E',
+    color: '#ffbd59',
+    borderColor: '#ffbd59',
   },
 });
 

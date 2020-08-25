@@ -76,7 +76,7 @@ const CartItemCard = ({ cartItem, handleDeleteCartItem }) => {
           style={{ paddingRight: 5 }}
           name="delete"
           size={30}
-          color={'#2BDA8E'}
+          color={'#ffbd59'}
         />
       </TouchableOpacity> */}
     </Container>

@@ -59,7 +59,7 @@ const HomeScreenPresenter = ({
               Best selling products
             </TextCustom>
           </Block>
-          <MasonryProducts products={bestSellingProducts.slice(0, 6)} />
+          <MasonryProducts products={bestSellingProducts} />
         </ScrollView>
       </View>
     </Container>

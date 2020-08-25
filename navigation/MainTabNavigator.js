@@ -31,7 +31,7 @@ const Routes = () => {
         },
       })}
       tabBarOptions={{
-        activeTintColor: '#2BDA8E',
+        activeTintColor: '#ffbd59',
         inactiveTintColor: 'gray',
         labelStyle: { fontSize: 13 },
       }}

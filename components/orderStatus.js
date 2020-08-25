@@ -11,7 +11,7 @@ const OrderStatus = ({ lastupdated, status }) => {
         paddingLeft: 30,
       }}
     >
-      <FontAwesome name="check-circle" size={30} color="#2BDA8E" />
+      <FontAwesome name="check-circle" size={30} color="#ffbd59" />
       <View
         style={{
           paddingLeft: 15,

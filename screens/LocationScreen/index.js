@@ -158,11 +158,11 @@ const style = StyleSheet.create({
     marginBottom: 30,
   },
   tabActive: {
-    borderBottomColor: '#2BDA8E',
+    borderBottomColor: '#ffbd59',
     borderBottomWidth: 3,
   },
   tabLinkActive: {
-    color: '#2BDA8E',
+    color: '#ffbd59',
   },
 });
 
