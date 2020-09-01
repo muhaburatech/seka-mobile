@@ -1,1 +1,1 @@
-export const backendUrl = 'https://seka-api.herokuapp.com';
+export const backendUrl = 'http://192.168.1.65:1337';
