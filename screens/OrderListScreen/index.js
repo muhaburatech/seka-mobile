@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Linking } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { connect } from 'react-redux';
@@ -9,10 +9,17 @@ import SmallButton from '../../components/SmallButton';
 
 const OrderList = ({ orders = [], user }) => {
   const navigation = useNavigation();
+  const [allOrders, setallOrders] = useState(orders);
+  const [getOrders, setgetOrders] = useState(() => {
+    fetchOrders();
+  });
+  useEffect(() => {
+    setallOrders(orders);
+  }, [orders]);
 
   return (
     <ScrollView>
-      {orders.map((order) => {
+      {allOrders.map((order) => {
         return (
           <OrderCard
             navigation={navigation}
@@ -46,7 +53,7 @@ function OrderCard({ order, user, navigation }) {
 
   const message = `Hello, my name is ${user.text}
   i have an issue with order ${order.order_id} having products
-  ${order.products}that was placed at ${order.created_at}`;
+  ${order.products}that was placed at ${order.createdAt}`;
 
   return (
     <Card
@@ -64,7 +71,7 @@ function OrderCard({ order, user, navigation }) {
         }}
       >
         <Row col1={`Order:`} col2={`${order.order_id.substring(30)}`} isBold />
-        <Row col1={`Last Updated:`} col2={`${order.updated_at}`} />
+        <Row col1={`Last Updated:`} col2={`${order.updatedAt}`} />
         {order.products.split(',').map((item) => {
           const temp = item.split(' - ');
           return <Row key={item.id} col1={`${temp[0]}`} col2={temp[1]} />;

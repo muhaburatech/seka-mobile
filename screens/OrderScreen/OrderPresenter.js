@@ -24,7 +24,7 @@ const OrderPresenter = ({ order }) => {
 
   return (
     <ScrollView>
-      <OrderTracking status={order.status} lastupdated={order.updated_at} />
+      <OrderTracking status={order.status} lastupdated={order.updatedAt} />
       <OrderDetails
         products={products}
         totalPrice={totalPrice}
