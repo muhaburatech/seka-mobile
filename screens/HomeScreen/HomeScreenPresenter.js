@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import MasonryProducts from '../../components/MasonryProducts';
+import Product from '../../components/ProductCard';
 import CategoryHeader from '../../components/CategoryHeader/';
-import { ScrollView, View, StyleSheet } from 'react-native';
+import { ScrollView, View, StyleSheet, FlatList } from 'react-native';
 import Block from '../../components/Block';
 import theme from '../../constants/theme';
 import TextCustom from '../../components/Text';
@@ -17,8 +18,9 @@ const Container = styled.View`
 const HomeScreenPresenter = ({
   currentTab,
   handleCategoryChange,
-  featuredProducts,
-  bestSellingProducts,
+  products = [],
+  // featuredProducts,
+  // bestSellingProducts,
 }) => {
   return (
     <Container>
@@ -37,7 +39,12 @@ const HomeScreenPresenter = ({
           flex: 4,
         }}
       >
-        <ScrollView>
+        <FlatList
+          data={products}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+        />
+        {/* <ScrollView>
           {featuredProducts.length > 0 && (
             <View>
               <Block
@@ -60,7 +67,7 @@ const HomeScreenPresenter = ({
             </TextCustom>
           </Block>
           <MasonryProducts products={bestSellingProducts} />
-        </ScrollView>
+        </ScrollView> */}
       </View>
     </Container>
   );

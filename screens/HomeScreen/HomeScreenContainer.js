@@ -44,6 +44,7 @@ function Home({ products }) {
   return (
     <HomeScreenPresenter
       currentTab={currentTab}
+      products={products}
       featuredProducts={featuredProducts}
       bestSellingProducts={bestSellingProducts}
       handleCategoryChange={_handleCategoryChange}

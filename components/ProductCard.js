@@ -2,7 +2,8 @@ import React from 'react';
 import { TouchableWithoutFeedback } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AutoHeightImage from 'react-native-auto-height-image';
-import PropTypes from 'prop-types';
+import { Image } from 'react-native-expo-image-cache';
+
 import styled from 'styled-components';
 import Layout from '../constants/Layout';
 import Colors from '../constants/Colors';
@@ -42,12 +43,14 @@ const ProductCard = ({ product }) => {
     >
       <Container>
         <ImageContainer>
-          <AutoHeightImage
-            width={Layout.window.width / 2 - 30}
-            source={{ uri: product.Image[0]['url'] }}
+          <Image
             style={{
+              width: Layout.window.width / 2 - 30,
               borderRadius: 15,
+              height: 150,
             }}
+            // style={{ height: 100, width: 100 }}
+            uri={product.Image[0].url}
           />
         </ImageContainer>
         <Name>{product.Title}</Name>
