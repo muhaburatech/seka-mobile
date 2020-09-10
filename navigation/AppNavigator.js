@@ -23,7 +23,7 @@ const Navigator = () => {
           name="Home"
           component={MainTabNavigator}
           options={{
-            headerTitle: 'SEKA',
+            headerTitle: 'SEKA FOODS',
           }}
         />
         <Stack.Screen name="My Order" component={Order} />
