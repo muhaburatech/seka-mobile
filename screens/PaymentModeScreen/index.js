@@ -73,7 +73,7 @@ const PaymentOptionsScreen = ({
           </Text>
         </View>
       </PaymentModeCard>
-      <PaymentModeCard
+      {/* <PaymentModeCard
         handleClick={function payUsingMomo() {
           return undefined;
         }}
@@ -108,7 +108,7 @@ const PaymentOptionsScreen = ({
             MTN Mobile Money
           </Text>
         </View>
-      </PaymentModeCard>
+      </PaymentModeCard> */}
     </View>
   );
 };
