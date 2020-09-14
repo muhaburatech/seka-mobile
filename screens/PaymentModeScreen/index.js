@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { Image } from 'react-native';
 import { Card, View, Text } from 'react-native-ui-lib';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { connect } from 'react-redux';
+import uuid from 'react-native-uuid';
 
 import { registerOrder, fetchOrders } from '../../redux/actions/order/order';
 import { clearCartInfo } from '../../redux/actions/cart/actions';
@@ -33,47 +35,81 @@ const PaymentOptionsScreen = ({
   }
 
   return (
-    <Card
-      row
-      borderRadius={12}
-      onPress={() => {
-        const orderId = idGeneretor();
-        register_order({ orderId, cartItems, choosenLocation, phone });
-        getAllOrders(phone);
-        deleteAllItemsInCart();
-        setShowModal(true);
-      }}
-      containerStyle={{ margin: 20 }}
-      enableShadow={true}
-    >
-      <View
-        row
-        flex
-        spread
-        style={{
-          padding: 40,
+    <View>
+      <PaymentModeCard
+        handleClick={function payOnCashDelivery() {
+          const orderId = idGeneretor();
+          register_order({ orderId, cartItems, choosenLocation, phone });
+          getAllOrders(phone);
+          deleteAllItemsInCart();
+          setShowModal(true);
         }}
       >
         <View
-          flex-1
+          row
+          flex
+          spread
           style={{
-            marginTop: 2,
+            padding: 40,
           }}
         >
-          <FontAwesome5 name="hand-holding-usd" size={30} color="#ffbd59" />
+          <View
+            flex-1
+            style={{
+              marginTop: 2,
+            }}
+          >
+            <FontAwesome5 name="hand-holding-usd" size={30} color="#ffbd59" />
+          </View>
+          <Text
+            flex-5
+            style={{
+              fontSize: 20,
+              fontWeight: 'bold',
+              marginTop: 5,
+            }}
+          >
+            Cash on Delivery
+          </Text>
         </View>
-        <Text
-          flex-5
+      </PaymentModeCard>
+      <PaymentModeCard
+        handleClick={function payUsingMomo() {
+          return undefined;
+        }}
+      >
+        <View
+          row
+          flex
+          spread
           style={{
-            fontSize: 20,
-            fontWeight: 'bold',
-            marginTop: 5,
+            padding: 40,
           }}
         >
-          Cash on Delivery
-        </Text>
-      </View>
-    </Card>
+          <View
+            flex-1
+            style={{
+              marginTop: 2,
+            }}
+          >
+            <Image
+              style={{ width: 30, height: 30 }}
+              source={require('../../assets/images/momo.png')}
+            />
+          </View>
+          <Text
+            flex-5
+            style={{
+              fontSize: 20,
+              fontWeight: 'bold',
+              marginTop: 5,
+            }}
+          >
+            MTN Mobile Money
+          </Text>
+        </View>
+      </PaymentModeCard>
+    </View>
   );
 };
 
@@ -90,3 +126,17 @@ export default connect(mapStateToProps, {
   deleteAllItemsInCart: clearCartInfo,
   getAllOrders: fetchOrders,
 })(PaymentOptionsScreen);
+
+function PaymentModeCard({ children, handleClick }) {
+  return (
+    <Card
+      row
+      borderRadius={12}
+      onPress={handleClick}
+      containerStyle={{ margin: 20 }}
+      enableShadow={true}
+    >
+      {children}
+    </Card>
+  );
+}
