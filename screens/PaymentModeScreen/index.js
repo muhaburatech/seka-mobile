@@ -73,9 +73,9 @@ const PaymentOptionsScreen = ({
           </Text>
         </View>
       </PaymentModeCard>
-      {/* <PaymentModeCard
+      <PaymentModeCard
         handleClick={function payUsingMomo() {
-          return undefined;
+          navigation.navigate('Mobile Money');
         }}
       >
         <View
@@ -108,7 +108,7 @@ const PaymentOptionsScreen = ({
             MTN Mobile Money
           </Text>
         </View>
-      </PaymentModeCard> */}
+      </PaymentModeCard>
     </View>
   );
 };

@@ -12,6 +12,7 @@ import Verify from '../screens/OTPScreen/VerifyCode';
 import Payment from '../screens/PaymentModeScreen';
 import Order from '../screens/OrderScreen';
 import OrderListScreen from '../screens/OrderListScreen';
+import MobileMoney from '../screens/PaymentModeScreen/PayUsingMobileMoney';
 
 const Stack = createStackNavigator();
 
@@ -35,6 +36,7 @@ const Navigator = () => {
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Signup" component={SignupScreen} />
         <Stack.Screen name="Order List" component={OrderListScreen} />
+        <Stack.Screen name="Mobile Money" component={MobileMoney} />
       </Stack.Navigator>
     </NavigationContainer>
   );

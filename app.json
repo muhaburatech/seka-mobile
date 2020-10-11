@@ -23,7 +23,7 @@
     },
     "android": {
       "package": "com.minega25.seka",
-      "versionCode": 2
+      "versionCode": 3
     }
   }
 }
