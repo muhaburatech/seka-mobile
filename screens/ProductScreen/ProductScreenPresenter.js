@@ -7,6 +7,9 @@ import Colors from '../../constants/Colors';
 import UserPartials from '../../components/UserPartials';
 import Modal from '../../components/Modal';
 import formatNumber from '../../utils/formatNumber';
+import uuid from 'react-native-uuid';
+
+
 
 const getHeight = () =>
   Layout.window.height <= 667
@@ -65,6 +68,8 @@ const ProductScreenPresenter = ({
   modalVisible,
   handlePressOk,
 }) => {
+
+  const key = uuid.v4();
   return (
     <Container>
       <StatusBar barStyle="light-content" />

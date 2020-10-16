@@ -14,6 +14,7 @@ const PhoneInputScreen = ({ dispatch }) => {
   const navigation = useNavigation();
   const [dialCode, setDialCode] = useState(null);
   const [text, setText] = useState('');
+  const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState(null);
 
   const onSend = (phonePlusCode, otp) => {
@@ -32,11 +33,13 @@ const PhoneInputScreen = ({ dispatch }) => {
     axios
       .post(`${backendUrl}/phonebooks`, {
         number: phoneNumber,
-        email: text,
+        email,
+        username: text
       })
       .then((response) => {
         // Handle success.
-        dispatch(addUser({ text, phoneNumber }));
+        dispatch(addUser({ text, phoneNumber, email }));
+        console.log('Saved already checked store and db ======')
       })
       .catch((error) => {
         // Handle error.
@@ -50,6 +53,7 @@ const PhoneInputScreen = ({ dispatch }) => {
     setDialCode(dialCode);
     setPhoneNumber(phoneNumber);
   };
+
 
   var otp = otpgen.generate(4);
   const phoneNumberCopy =
@@ -67,6 +71,24 @@ const PhoneInputScreen = ({ dispatch }) => {
         padding: 5,
       }}
     >
+      
+
+<View
+        style={{
+          height: 50,
+          width: 350,
+          marginBottom: 40,
+        }}
+      >
+       <TextInput
+          label="Enter your email"
+          theme={{ colors: { primary: '#ffbd59' } }}
+          underlineColor={'#ffbd59'}
+          keyboardType="email-address"
+          value={email}
+          onChangeText={(email) => setEmail(email)}
+        />
+      </View>
       <View
         style={{
           height: 50,
@@ -92,6 +114,9 @@ const PhoneInputScreen = ({ dispatch }) => {
           accent
           text={`Send verification code`}
           onPress={() => {
+            if (!email) {
+              return Alert.alert('Please enter your email');
+            }
             if (!text) {
               return Alert.alert('Please enter your name');
             }
@@ -105,5 +130,7 @@ const PhoneInputScreen = ({ dispatch }) => {
     </View>
   );
 };
+
+
 
 export default connect()(PhoneInputScreen);

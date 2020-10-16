@@ -16,6 +16,7 @@ export default function cart(state = [], { type, cartItem }) {
           price: cartItem.price * cartItem.count,
           variantId: cartItem.variantId,
         },
+        
       ];
     case FLUSH_CART_INFO:
       return [];

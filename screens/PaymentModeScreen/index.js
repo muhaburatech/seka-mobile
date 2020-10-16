@@ -11,6 +11,8 @@ import { clearCartInfo } from '../../redux/actions/cart/actions';
 import Modal from '../../components/Modal';
 
 import idGeneretor from '../../utils/uniqueIDgenerator';
+
+
 const PaymentOptionsScreen = ({
   phone,
   cartItems,
@@ -117,7 +119,7 @@ const mapStateToProps = ({ cart, location, otp }) => {
   return {
     cartItems: cart,
     choosenLocation: location.filter((loc) => loc.chosen === true)[0],
-    phone: otp.user.phoneNumber,
+    phone: otp.user.phoneNumber
   };
 };
 
