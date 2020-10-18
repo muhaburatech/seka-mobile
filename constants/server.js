@@ -1,3 +1,3 @@
-export const backendUrl = 'https://21a7c8df012a.ngrok.io';
+export const backendUrl = 'https://72f69541576c.ngrok.io';
 
 //  https://seka-api.herokuapp.com
