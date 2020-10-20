@@ -39,7 +39,6 @@ const PhoneInputScreen = ({ dispatch }) => {
       .then((response) => {
         // Handle success.
         dispatch(addUser({ text, phoneNumber, email }));
-        console.log('Saved already checked store and db ======')
       })
       .catch((error) => {
         // Handle error.

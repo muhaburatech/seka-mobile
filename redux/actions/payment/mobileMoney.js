@@ -31,14 +31,14 @@ const paymentOrderError = (error) => {
 
 
 export const sendMomoPaymentRequest = ( data ) => async dispatch => {
+    
     const res = await axios.post(`${backendUrl}/mobilemoney`, data)
     .then( (response) => {
-        console.log('data ====== in action', response);
-        // dispatch(paymentOrderSuccess(response))
-        // return response.data;
+        dispatch(paymentOrderSuccess(response.data))
+        return response.data;
     }).catch(err => {
         dispatch(paymentOrderError(err));
-        console.log('err from action:', err);
+        console.log('err from action:', err.message);
     })
     return res;
 }

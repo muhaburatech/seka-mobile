@@ -25,7 +25,6 @@ class VerifyCode extends Component {
   };
 
   render() {
-    console.log(this.state.otpInput);
     return (
       <View style={styles.container}>
         <Text style={styles.instructions}>
@@ -44,7 +43,6 @@ class VerifyCode extends Component {
             accent
             onPress={() => {
               const isValid = this.props.storedCode.code == this.state.otpInput;
-              // const isValid = '0000' == this.state.otpInput;
               if (!isValid) {
                 this.alertText();
               } else {

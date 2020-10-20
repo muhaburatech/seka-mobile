@@ -87,7 +87,6 @@ function OrderCard({ order, user, navigation }) {
           <SmallButton
             text="View Status"
             onPress={() => {
-              console.log('navigation :>> ', navigation);
               return navigation.navigate('My Order', order);
             }}
             accent

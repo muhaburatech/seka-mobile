@@ -10,7 +10,8 @@ import AppNavigator from './navigation/AppNavigator';
 import { store, persistor } from './redux/store';
 import fetchProductsAction from './redux/actions/product/fetchProducts';
 import fetchCategoriesAction from './redux/actions/categories/fetchCategories';
-import io from 'socket.io-client';
+import AppRectContextProvider from './utils/reactContext';
+
 
 const Container = styled.View`
   flex: 1;
@@ -23,11 +24,7 @@ class App extends React.Component {
   };
 
   async componentDidMount() {
-   this.socket = io('http://172.20.10.2:5000');
-    this.socket.emit('event1', 'i am coming from sekaaa.....');
-    this.socket.on('postback', (ctl) => {
-      console.log('postback from the provider', ctl);
-    })
+
     // Prevent native splash screen from autohiding
     try {
       await SplashScreen.preventAutoHideAsync();
@@ -62,7 +59,9 @@ class App extends React.Component {
     return (
       <Container>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <AppNavigator />
+       <AppRectContextProvider>
+         <AppNavigator />
+       </AppRectContextProvider>
       </Container>
     );
   }

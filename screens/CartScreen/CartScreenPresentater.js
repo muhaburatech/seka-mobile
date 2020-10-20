@@ -30,9 +30,6 @@ const CartPresenter = ( {cartItems, calculatePrice} ) => {
     navigation.navigate('Location')
   }
 
-  console.log('props ==========>>>>>>', totalPrice);
-
-
 
   if (cartItems.length === 0) {
     return (

@@ -1,54 +1,77 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { View, Text, Alert } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { connect } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import SmallButton from '../../components/SmallButton';
 import { sendMomoPaymentRequest } from '../../redux/actions/payment/mobileMoney';
-import uuid from 'react-native-uuid';
+import { addTransaction } from '../../redux/actions/transactions';
+import {AppStateContext} from '../../utils/reactContext';
 
 
-const PayUsingMobileMoney = ({user, totalPrice, sendMomoPaymentRequest, momoState, products}) => {
+const PayUsingMobileMoney = ({user, totalPrice, sendMomoPaymentRequest, addTransaction, transactionState,  momoState, products}) => {
+
+  const {socket} = useContext(AppStateContext)
 
   const navigation = useNavigation();
-
-
   const [phoneNumber, setPhoneNumber] = useState('');
   const [btntext, setBtntext] = useState('Pay now');
   const [disable, setDisable] = useState(false);
 
-
-
-
   useEffect(() => {
    const numb = `0${user.phoneNumber.replace(/\s+/g, '')}`;
   setPhoneNumber(numb);
+
   }, []);
 
 
   const processPayment = async () => {
     setBtntext('Sending request...');
     setDisable(true);
-    const key = uuid.v4();
+    // create transaction with the socket it
 
-    // JSON.stringify(products[0])
+    const transactionData = {
+      status: 'pending',
+      amount: `${totalPrice}`,
+      phoneNumber: `0${user.phoneNumber.replace(/\s+/g, '')}`,
+      username: user.text,
+      socketId: socket.id
+    };
 
+    const transaction = await addTransaction(transactionData);
+
+    console.log('trans===', transaction._id);
+
+      if(!transaction) {
+        Alert.alert('Transaction request', 'Something went wrong, please try again!');
+        setBtntext('Pay now');
+        setDisable(false);
+      }else{
+
+        // get the transaction created and take its id make it the refid and rend the payment request
     const data = {
-      details: 'order',
+      details: 'Payment of order.',
       amount: Number(totalPrice),
       email: user.email,
       cname: user.text,
       cnumber: `0${user.phoneNumber.replace(/\s+/g, '')}`,
-      refid: key
+      refid: transaction._id
     };
 
     const paymentRes = await sendMomoPaymentRequest(data);
 
-
-    setTimeout(() => {
-      navigation.navigate('Momo proccessing');
-    }, 3000);
+    if(paymentRes && paymentRes.retcode === 0){
+        navigation.navigate('Momo proccessing');
+        setBtntext('Pay now');
+        setDisable(false);
+  
+    }else {
+    Alert.alert('Payment process', 'Something went wrong, please try again!')
+    setBtntext('Pay now');
+    setDisable(false);
+    }
   }
+      }
 
 
   const onSend = (phoneNumber) => {
@@ -60,10 +83,6 @@ const PayUsingMobileMoney = ({user, totalPrice, sendMomoPaymentRequest, momoStat
     Alert.alert('Payment comfirmation', 'Do you want to proceed the payment?', [{text: 'Yes', onPress: () => processPayment()}, {text: 'No'}])
 
   };
-
-
-console.log('loaded momo....');
-
 
   return (
     <View
@@ -119,7 +138,8 @@ const mapStateToProps = ( state ) => {
     products: state.cart,
     momoState: state.momo,
     totalPrice: state.totalPrice,
+    transactionState: state.transaction,
    };
 }
 
-export default connect(mapStateToProps, { sendMomoPaymentRequest })(PayUsingMobileMoney);
+export default connect(mapStateToProps, { sendMomoPaymentRequest, addTransaction })(PayUsingMobileMoney);

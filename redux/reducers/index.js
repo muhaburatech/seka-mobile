@@ -6,6 +6,7 @@ import otp from './userVerification';
 import order from './order';
 import momo from './payment';
 import totalPrice from './pricing';
+import transaction from './transactions';
 
 export default {
   products,
@@ -15,5 +16,6 @@ export default {
   otp,
   order,
   momo,
-  totalPrice
+  totalPrice,
+  transaction
 };
