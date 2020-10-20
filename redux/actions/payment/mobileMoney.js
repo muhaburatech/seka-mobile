@@ -38,7 +38,7 @@ export const sendMomoPaymentRequest = ( data ) => async dispatch => {
         return response.data;
     }).catch(err => {
         dispatch(paymentOrderError(err));
-        console.log('err from action:', err.message);
+        console.log('err from action:', err);
     })
     return res;
 }
